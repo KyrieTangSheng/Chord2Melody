@@ -143,69 +143,225 @@ def fix_melody_timing(melody: List[Dict], chord_sequence: List[str],
     return fixed_melody
 
 
-def extract_chord_timing_from_midi(midi_path: str) -> List[tuple]:
+def extract_chord_timing_from_midi(midi_path: str, target_chord_count: int = None) -> List[tuple]:
     """
-    Extract actual chord timing from original MIDI file
+    Extract actual chord timing from original MIDI file with better alignment
+    
+    Args:
+        midi_path: Path to MIDI file
+        target_chord_count: Expected number of chords to match
     
     Returns:
         List of (start_time, end_time, chord_index) tuples
     """
     try:
         midi = pretty_midi.PrettyMIDI(midi_path)
+        total_duration = midi.get_end_time()
         
-        # Find accompaniment track (usually has chords)
+        print(f"MIDI Analysis: {midi_path}")
+        print(f"  Total duration: {total_duration:.1f}s")
+        print(f"  Target chord count: {target_chord_count}")
+        
+        # Find the best accompaniment track
         accompaniment_track = None
-        for instrument in midi.instruments:
-            if not instrument.is_drum and "melody" not in instrument.name.lower():
-                accompaniment_track = instrument
-                break
+        max_polyphony = 0
         
-        if not accompaniment_track:
-            # Fallback: use any non-drum track
-            for instrument in midi.instruments:
-                if not instrument.is_drum:
-                    accompaniment_track = instrument
-                    break
-        
-        if not accompaniment_track:
-            print("No suitable track found for chord timing")
-            return []
-        
-        # Extract chord timing by grouping simultaneous notes
-        chord_times = []
-        notes = sorted(accompaniment_track.notes, key=lambda n: n.start)
-        
-        if not notes:
-            return []
-        
-        current_chord_start = notes[0].start
-        current_chord_notes = []
-        tolerance = 0.1  # 100ms tolerance for "simultaneous" notes
-        
-        for note in notes:
-            if note.start - current_chord_start <= tolerance:
-                # Part of current chord
-                current_chord_notes.append(note)
-            else:
-                # New chord
-                if current_chord_notes:
-                    chord_end = max(n.end for n in current_chord_notes)
-                    chord_times.append((current_chord_start, chord_end, len(chord_times)))
+        for i, instrument in enumerate(midi.instruments):
+            if instrument.is_drum:
+                continue
                 
-                current_chord_start = note.start
-                current_chord_notes = [note]
+            # Calculate average polyphony (notes playing simultaneously)
+            polyphony = calculate_average_polyphony(instrument)
+            print(f"  Track {i} ({instrument.name}): {len(instrument.notes)} notes, polyphony: {polyphony:.1f}")
+            
+            # Skip melody tracks (usually have lower polyphony)
+            if "melody" in instrument.name.lower() or "lead" in instrument.name.lower():
+                continue
+                
+            if polyphony > max_polyphony:
+                max_polyphony = polyphony
+                accompaniment_track = instrument
         
-        # Add final chord
-        if current_chord_notes:
-            chord_end = max(n.end for n in current_chord_notes)
-            chord_times.append((current_chord_start, chord_end, len(chord_times)))
+        if not accompaniment_track:
+            print("  No suitable accompaniment track found, using fallback")
+            return create_fallback_timing(total_duration, target_chord_count)
         
-        print(f"Extracted {len(chord_times)} chord segments from MIDI")
-        return chord_times
+        print(f"  Using track: {accompaniment_track.name} (polyphony: {max_polyphony:.1f})")
+        
+        # Extract chord change points
+        chord_changes = detect_chord_changes(accompaniment_track, total_duration)
+        
+        print(f"  Detected {len(chord_changes)} chord changes")
+        
+        # Align with target chord count
+        if target_chord_count and len(chord_changes) != target_chord_count:
+            chord_changes = align_chord_timing(chord_changes, target_chord_count, total_duration)
+            print(f"  Aligned to {len(chord_changes)} chord segments")
+        
+        return chord_changes
         
     except Exception as e:
         print(f"Error extracting chord timing: {e}")
+        if target_chord_count:
+            return create_fallback_timing(60.0, target_chord_count)  # Default 1 minute
         return []
+
+def calculate_average_polyphony(instrument):
+    """Calculate average number of simultaneous notes"""
+    if not instrument.notes:
+        return 0.0
+    
+    # Sample polyphony at regular intervals
+    duration = max(note.end for note in instrument.notes)
+    sample_points = int(duration * 4)  # Sample every 0.25 seconds
+    
+    total_polyphony = 0
+    for i in range(sample_points):
+        time_point = i * 0.25
+        active_notes = sum(1 for note in instrument.notes 
+                          if note.start <= time_point < note.end)
+        total_polyphony += active_notes
+    
+    return total_polyphony / sample_points if sample_points > 0 else 0
+
+def detect_chord_changes(instrument, total_duration):
+    """Detect when chords change in the instrument"""
+    if not instrument.notes:
+        return []
+    
+    # Group notes into chord events
+    chord_events = []
+    tolerance = 0.15  # 150ms tolerance for simultaneous notes
+    
+    sorted_notes = sorted(instrument.notes, key=lambda n: n.start)
+    
+    i = 0
+    while i < len(sorted_notes):
+        chord_start = sorted_notes[i].start
+        chord_notes = [sorted_notes[i]]
+        
+        # Collect all notes that start around the same time
+        j = i + 1
+        while j < len(sorted_notes) and sorted_notes[j].start - chord_start <= tolerance:
+            chord_notes.append(sorted_notes[j])
+            j += 1
+        
+        # Only consider as chord if multiple notes or significant gap to next
+        if len(chord_notes) >= 2 or (j < len(sorted_notes) and sorted_notes[j].start - chord_start > 0.5):
+            chord_events.append({
+                'start': chord_start,
+                'notes': chord_notes,
+                'polyphony': len(chord_notes)
+            })
+        
+        i = j
+    
+    # Convert chord events to timing segments
+    chord_times = []
+    for i, event in enumerate(chord_events):
+        start_time = event['start']
+        
+        # End time is either the next chord start or note endings
+        if i + 1 < len(chord_events):
+            end_time = chord_events[i + 1]['start']
+        else:
+            # Last chord: use the longest note end time
+            end_time = max(note.end for note in event['notes'])
+            end_time = min(end_time, total_duration)
+        
+        # Ensure minimum chord duration
+        if end_time - start_time >= 0.3:  # At least 300ms
+            chord_times.append((start_time, end_time, len(chord_times)))
+    
+    return chord_times
+
+def align_chord_timing(detected_changes, target_count, total_duration):
+    """Align detected chord changes to target chord count"""
+    
+    if len(detected_changes) == target_count:
+        return detected_changes
+    
+    print(f"  Aligning {len(detected_changes)} detected changes to {target_count} target chords")
+    
+    if len(detected_changes) > target_count:
+        # Too many detected changes - merge some
+        return merge_chord_segments(detected_changes, target_count)
+    else:
+        # Too few detected changes - interpolate
+        return interpolate_chord_segments(detected_changes, target_count, total_duration)
+
+def merge_chord_segments(segments, target_count):
+    """Merge chord segments to reach target count"""
+    if target_count >= len(segments):
+        return segments
+    
+    # Simple approach: take evenly spaced segments
+    indices = [int(i * len(segments) / target_count) for i in range(target_count)]
+    merged = []
+    
+    for i, idx in enumerate(indices):
+        start_time = segments[idx][0]
+        
+        # End time from next segment or last segment's end
+        if i + 1 < len(indices):
+            next_idx = indices[i + 1]
+            end_time = segments[next_idx][0]
+        else:
+            end_time = segments[-1][1]
+        
+        merged.append((start_time, end_time, i))
+    
+    return merged
+
+def interpolate_chord_segments(segments, target_count, total_duration):
+    """Interpolate to create more chord segments"""
+    if not segments:
+        # No detected segments - create uniform timing
+        return create_fallback_timing(total_duration, target_count)
+    
+    # Create evenly spaced timing based on song duration
+    chord_duration = total_duration / target_count
+    interpolated = []
+    
+    for i in range(target_count):
+        start_time = i * chord_duration
+        end_time = (i + 1) * chord_duration
+        interpolated.append((start_time, end_time, i))
+    
+    return interpolated
+
+def create_fallback_timing(duration, chord_count):
+    """Create uniform chord timing as fallback"""
+    if chord_count <= 0:
+        return []
+    
+    chord_duration = duration / chord_count
+    return [(i * chord_duration, (i + 1) * chord_duration, i) 
+            for i in range(chord_count)]
+
+# Test function to verify timing extraction
+def test_chord_timing_extraction(midi_path, expected_chords):
+    """Test the chord timing extraction"""
+    print(f"Testing chord timing extraction on: {midi_path}")
+    
+    chord_times = extract_chord_timing_from_midi(midi_path, len(expected_chords))
+    
+    print(f"\nResults:")
+    print(f"Expected chords: {len(expected_chords)}")
+    print(f"Extracted segments: {len(chord_times)}")
+    
+    for i, (start, end, idx) in enumerate(chord_times[:10]):  # Show first 10
+        duration = end - start
+        chord = expected_chords[i] if i < len(expected_chords) else "N/A"
+        print(f"  {i+1:2d}. {start:6.1f}s - {end:6.1f}s ({duration:4.1f}s) -> {chord}")
+    
+    if len(chord_times) > 10:
+        print(f"  ... and {len(chord_times) - 10} more")
+    
+    total_duration = chord_times[-1][1] if chord_times else 0
+    print(f"\nTotal duration: {total_duration:.1f}s")
+    
+    return chord_times
 
 
 def align_melody_to_chord_timing(melody: List[Dict], chord_times: List[tuple]) -> List[Dict]:
@@ -253,3 +409,4 @@ def align_melody_to_chord_timing(melody: List[Dict], chord_times: List[tuple]) -
         aligned_melody.append(aligned_note)
     
     return aligned_melody
+

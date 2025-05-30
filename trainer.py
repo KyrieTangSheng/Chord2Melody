@@ -50,25 +50,28 @@ class ChordToMelodyTrainer:
         num_batches = 0
         
         for batch_idx, batch in enumerate(self.train_loader):
-            # Move batch to device
+            # Move batch to device - updated for new dataset structure
             full_chord_sequence = batch['full_chord_sequence'].to(self.device)
+            chord_durations = batch['chord_durations'].to(self.device)  # NEW
             chord_mask = batch['chord_mask'].to(self.device)
             focus_positions = batch['focus_position'].to(self.device)
-            segment_position = batch['segment_position'].to(self.device)
+            target_chord_duration = batch['target_chord_duration'].to(self.device)  # NEW
             melody_pitch = batch['melody_pitch'].to(self.device)
             melody_duration = batch['melody_duration'].to(self.device)
             melody_start = batch['melody_start'].to(self.device)
             melody_mask = batch['melody_mask'].to(self.device)
             
+            # REMOVED: segment_position is not in the new dataset
+            
             self.optimizer.zero_grad()
             
-            # Forward pass
+            # Forward pass - updated for new model inputs
             pitch_logits, duration_pred, start_pred = self.model(
                 full_chord_sequence,
                 chord_mask,
                 focus_positions,
-                segment_position,
-                melody_pitch,
+                chord_durations=chord_durations,  # NEW: pass chord durations
+                melody_pitch=melody_pitch,
                 training=True
             )
             
@@ -118,10 +121,10 @@ class ChordToMelodyTrainer:
                 current_loss = total_loss / (batch_idx + 1)
                 current_acc = total_accuracy / (batch_idx + 1)
                 print(f"  Batch {batch_idx}/{len(self.train_loader)}: "
-                      f"Loss {current_loss:.4f}, Acc {current_acc:.3f}")
+                    f"Loss {current_loss:.4f}, Acc {current_acc:.3f}")
         
         return total_loss / num_batches, total_accuracy / num_batches
-    
+
     def validate(self):
         self.model.eval()
         total_loss = 0
@@ -130,11 +133,12 @@ class ChordToMelodyTrainer:
         
         with torch.no_grad():
             for batch in self.val_loader:
-                # Move batch to device but keep a CPU copy for problematic operations
+                # Move batch to device - updated for new dataset structure
                 full_chord_sequence = batch['full_chord_sequence'].to(self.device)
+                chord_durations = batch['chord_durations'].to(self.device)  # NEW
                 chord_mask = batch['chord_mask'].to(self.device)
                 focus_positions = batch['focus_position'].to(self.device)
-                segment_position = batch['segment_position'].to(self.device)
+                target_chord_duration = batch['target_chord_duration'].to(self.device)  # NEW
                 melody_pitch = batch['melody_pitch'].to(self.device)
                 melody_duration = batch['melody_duration'].to(self.device)
                 melody_start = batch['melody_start'].to(self.device)
@@ -146,8 +150,8 @@ class ChordToMelodyTrainer:
                         full_chord_sequence,
                         chord_mask,
                         focus_positions,
-                        segment_position,
-                        melody_pitch,
+                        chord_durations=chord_durations,  # NEW: pass chord durations
+                        melody_pitch=melody_pitch,
                         training=True
                     )
                 except RuntimeError as e:
@@ -158,8 +162,8 @@ class ChordToMelodyTrainer:
                             full_chord_sequence.cpu(),
                             chord_mask.cpu(),
                             focus_positions.cpu(),
-                            segment_position.cpu(),
-                            melody_pitch.cpu(),
+                            chord_durations=chord_durations.cpu(),  # NEW
+                            melody_pitch=melody_pitch.cpu(),
                             training=True
                         )
                         # Move model and results back to MPS

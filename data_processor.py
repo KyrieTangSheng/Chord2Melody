@@ -213,21 +213,19 @@ class POP909DataProcessor:
             print(f"Skipping {song_id} due to missing files")
             return None
         
-        # FIXED: parse_chord_file now returns already simplified chords
         chords = self.parse_chord_file(chord_file_path)
         if len(chords) < 4:
             print(f"Skipping {song_id} - not enough chords ({len(chords)})")
             return None
         
         melody_track = self.extract_melody_track(midi_file_path)
-        # bridge_track = self.extract_bridge_track(midi_file_path)
+        bridge_track = self.extract_bridge_track(midi_file_path)
         
-        # combined_track = self.combine_tracks(melody_track, bridge_track)
-        # if not combined_track:
-        #     print(f"No combined track found for {song_id}")
-        #     return None
-        # TODO: TO BE CHANGED MAYBE
-        combined_track = melody_track
+        combined_track = self.combine_tracks(melody_track, bridge_track)
+        if not combined_track:
+            print(f"No combined track found for {song_id}")
+            return None
+        
         song_duration = max(chords[-1][1], combined_track.notes[-1].end)
         
         quantized_melody = self.quantize_melody(combined_track, song_duration)
@@ -235,8 +233,8 @@ class POP909DataProcessor:
             print(f"No quantized melody for song {song_id}")
             return None
         
-        # REMOVED: No need to simplify again since parse_chord_file already did it
-        melody_segments = self.create_melody_segments(chords, quantized_melody)
+        # CHANGED: Use chord-aligned segments instead of time-based segments
+        melody_segments = self.create_chord_aligned_segments(chords, quantized_melody)
         if not melody_segments:
             print(f"No melody segments for song {song_id}")
             return None
@@ -247,7 +245,7 @@ class POP909DataProcessor:
             'total_duration': song_duration,
             'num_chords': len(chords),
             'num_melody_notes': len(quantized_melody),
-            'full_chord_sequence': [chord[2] for chord in chords]  # Already simplified
+            'full_chord_sequence': [chord[2] for chord in chords]
         }
     
     def process_dataset(self) -> None:
@@ -319,30 +317,55 @@ class POP909DataProcessor:
         print(f"Dataset statistics: {stats}")
 
     def create_training_sequences(self) -> List[Dict]:
+        """
+        Create training sequences with proper chord-melody alignment
+        """
         training_sequences = []
         
         for song in self.processed_data:
             for segment in song['melody_segments']:
-                melody_output = []
-                for note in segment['melody_notes']:
-                    melody_output.append({
-                        'pitch': note['pitch'],
-                        'start': note['relative_start'],
-                        'duration': note['relative_end'] - note['relative_start']
-                    })
-                
-                training_sequences.append({
-                    'full_chord_sequence': segment['full_chord_sequence'],
-                    'focus_position': segment['focus_position'],
-                    'output_melody': melody_output,
-                    'song_id': song['song_id'],
-                    'segment_position': segment['segment_position']
-                })
+                # For each chord in the segment, create a training example
+                for chord_pair in segment['chord_melody_pairs']:
+                    
+                    # Prepare input: chord sequence with focus on current chord
+                    chord_sequence = segment['full_chord_sequence']
+                    current_chord_pos = chord_pair['chord_position_in_segment']
+                    
+                    # Prepare output: melody notes for this specific chord
+                    melody_notes = []
+                    for note in chord_pair['notes']:
+                        melody_notes.append({
+                            'pitch': note['pitch'],
+                            'start_time': note['start_in_chord'],  # Relative to chord start
+                            'duration': note['end_in_chord'] - note['start_in_chord'],
+                            'velocity': note['velocity']
+                        })
+                    
+                    # Create training example
+                    training_example = {
+                        'full_chord_sequence': chord_sequence,
+                        'chord_durations': segment['chord_durations'],
+                        'focus_position': current_chord_pos,  # Which chord we're generating for
+                        'target_chord': chord_pair['chord'],
+                        'chord_duration': chord_pair['chord_duration'],
+                        'output_melody': melody_notes,
+                        'song_id': song['song_id'],
+                        'segment_id': segment['segment_id'],
+                        'timing_context': {
+                            'bpm_estimate': 60.0 / (chord_pair['chord_duration'] / 2),  # Rough BPM estimate
+                            'time_signature': '4/4',  # Could be extracted from MIDI
+                            'chord_position_in_song': segment['segment_start_time'] / song['total_duration']
+                        }
+                    }
+                    
+                    # Only add if there are melody notes for this chord
+                    if len(melody_notes) > 0:
+                        training_sequences.append(training_example)
         
         with open(self.output_path / "training_sequences.pkl", 'wb') as f:
             pickle.dump(training_sequences, f)
         
-        print(f"Created {len(training_sequences)} training sequences")
+        print(f"Created {len(training_sequences)} chord-aligned training sequences")
         return training_sequences
     
     
@@ -426,6 +449,103 @@ class POP909DataProcessor:
         
         return f"{root}:{simplified_quality}"
 
+    def create_chord_aligned_segments(self, chords: List[Tuple[float, float, str]], melody: List[Dict]) -> List[Dict]:
+        """
+        Create training segments aligned to chord boundaries for better timing relationships.
+        Each segment represents a sequence of chords with their corresponding melody notes.
+        """
+        segments = []
+        
+        if not chords or not melody:
+            return segments
+        
+        # Parameters for chord-aligned segments
+        min_chords_per_segment = 4    # Minimum musical context
+        max_chords_per_segment = 12   # Maximum for attention span
+        overlap_chords = 2            # Overlap between segments
+        
+        # Create chord-aligned segments
+        chord_idx = 0
+        while chord_idx < len(chords):
+            # Define segment boundaries based on chords
+            segment_end_idx = min(chord_idx + max_chords_per_segment, len(chords))
+            
+            # Ensure minimum segment size
+            if segment_end_idx - chord_idx < min_chords_per_segment and segment_end_idx < len(chords):
+                segment_end_idx = min(chord_idx + min_chords_per_segment, len(chords))
+            
+            segment_chords = chords[chord_idx:segment_end_idx]
+            segment_start_time = segment_chords[0][0]
+            segment_end_time = segment_chords[-1][1]
+            
+            # Create chord-to-melody mappings for this segment
+            chord_melody_pairs = []
+            
+            for local_idx, (chord_start, chord_end, chord_symbol) in enumerate(segment_chords):
+                # Find melody notes that belong to this chord
+                chord_notes = []
+                
+                for note in melody:
+                    note_start = note['start_time']
+                    note_end = note['end_time']
+                    
+                    # Note belongs to chord if it overlaps with chord duration
+                    if not (note_end <= chord_start or note_start >= chord_end):
+                        # Calculate overlap percentage
+                        overlap_start = max(note_start, chord_start)
+                        overlap_end = min(note_end, chord_end)
+                        overlap_duration = overlap_end - overlap_start
+                        note_duration = note_end - note_start
+                        
+                        # Only include note if significant overlap (>50% of note duration)
+                        if note_duration > 0 and overlap_duration / note_duration > 0.5:
+                            # Make timing relative to chord start
+                            relative_note = {
+                                'pitch': note['pitch'],
+                                'start_in_chord': max(0, note_start - chord_start),
+                                'end_in_chord': min(chord_end - chord_start, note_end - chord_start),
+                                'duration': note.get('duration', note_end - note_start),  # Handle missing duration
+                                'velocity': note.get('velocity', 80),
+                                'chord_duration': chord_end - chord_start
+                            }
+                            chord_notes.append(relative_note)
+                
+                chord_melody_pairs.append({
+                    'chord': chord_symbol,
+                    'chord_duration': chord_end - chord_start,
+                    'chord_position_in_segment': local_idx,
+                    'notes': chord_notes,
+                    'absolute_start_time': chord_start,
+                    'absolute_end_time': chord_end
+                })
+            
+            # Only create segment if it has reasonable musical content
+            total_notes = sum(len(pair['notes']) for pair in chord_melody_pairs)
+            if total_notes > 0 and len(segment_chords) >= min_chords_per_segment:
+                segment = {
+                    'chord_melody_pairs': chord_melody_pairs,
+                    'full_chord_sequence': [pair['chord'] for pair in chord_melody_pairs],
+                    'chord_durations': [pair['chord_duration'] for pair in chord_melody_pairs],
+                    'segment_start_time': segment_start_time,
+                    'segment_end_time': segment_end_time,
+                    'total_duration': segment_end_time - segment_start_time,
+                    'num_chords': len(segment_chords),
+                    'total_notes': total_notes,
+                    'segment_id': len(segments)
+                }
+                segments.append(segment)
+            
+            # Move to next segment with overlap
+            step_size = max_chords_per_segment - overlap_chords
+            chord_idx += step_size
+            
+            # Safety check
+            if chord_idx >= len(chords) - min_chords_per_segment:
+                break
+        
+        return segments
+    
+    
 def process_dataset(dataset_path: str, output_path: str, melody_segment_length: int = 32):
     processor = POP909DataProcessor(dataset_path, output_path, melody_segment_length)
     processor.process_dataset()

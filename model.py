@@ -116,7 +116,253 @@ class AttentionChordToMelodyTransformer(nn.Module):
         
         return mask
     
-    def forward(self, full_chord_sequence, chord_mask, focus_positions, segment_position=None,
+    # TIMING ENHANCEMENT METHODS - Added from first document
+    def _align_simultaneous_notes(self, melody, tolerance=0.1):
+        """
+        Align notes that should be played simultaneously
+        
+        Args:
+            melody: List of note dictionaries with 'start_time', 'duration', 'pitch'
+            tolerance: Time tolerance for considering notes simultaneous (in seconds)
+        
+        Returns:
+            melody: Melody with aligned simultaneous notes
+        """
+        if len(melody) <= 1:
+            return melody
+        
+        # Sort melody by start time
+        sorted_melody = sorted(melody, key=lambda x: x['start_time'])
+        aligned_melody = []
+        
+        i = 0
+        while i < len(sorted_melody):
+            current_note = sorted_melody[i].copy()
+            simultaneous_notes = [current_note]
+            
+            # Find all notes that should start at the same time
+            j = i + 1
+            while j < len(sorted_melody):
+                next_note = sorted_melody[j]
+                time_diff = abs(next_note['start_time'] - current_note['start_time'])
+                
+                if time_diff <= tolerance:
+                    # This note should be simultaneous
+                    simultaneous_notes.append(next_note.copy())
+                    j += 1
+                else:
+                    break
+            
+            if len(simultaneous_notes) > 1:
+                # Align all simultaneous notes
+                avg_start_time = sum(note['start_time'] for note in simultaneous_notes) / len(simultaneous_notes)
+                
+                print(f"  Aligning {len(simultaneous_notes)} simultaneous notes at {avg_start_time:.2f}s")
+                print(f"    Pitches: {[note['pitch'] for note in simultaneous_notes]}")
+                
+                # Align start times
+                for note in simultaneous_notes:
+                    note['start_time'] = avg_start_time
+                
+                # Optional: Align durations for better harmony
+                avg_duration = sum(note['duration'] for note in simultaneous_notes) / len(simultaneous_notes)
+                for note in simultaneous_notes:
+                    note['duration'] = avg_duration
+            
+            aligned_melody.extend(simultaneous_notes)
+            i = j
+        
+        return aligned_melody
+
+    def _quantize_note_timing(self, melody, beat_duration=0.25):
+        """
+        Quantize note timing to musical beats for cleaner rhythm
+        
+        Args:
+            melody: List of note dictionaries
+            beat_duration: Duration of one beat in seconds (0.25 = 16th note at 120 BPM)
+        
+        Returns:
+            melody: Melody with quantized timing
+        """
+        print(f"  Quantizing notes to {beat_duration:.3f}s grid...")
+        
+        quantized_melody = []
+        
+        for note in melody:
+            quantized_note = note.copy()
+            
+            # Quantize start time to nearest beat
+            quantized_start = round(note['start_time'] / beat_duration) * beat_duration
+            
+            # Quantize duration to musical values
+            raw_duration = note['duration']
+            
+            # Common musical durations (in beats at 120 BPM)
+            musical_durations = [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0, 3.0, 4.0]  # 16th to whole note
+            
+            # Find closest musical duration
+            closest_duration = min(musical_durations, key=lambda x: abs(x - raw_duration))
+            
+            quantized_note['start_time'] = quantized_start
+            quantized_note['duration'] = closest_duration
+            
+            quantized_melody.append(quantized_note)
+        
+        return quantized_melody
+
+    def _remove_timing_conflicts(self, melody, min_gap=0.05):
+        """
+        Remove notes that create timing conflicts while preserving harmonies
+        
+        Args:
+            melody: List of note dictionaries
+            min_gap: Minimum gap between non-simultaneous notes
+        
+        Returns:
+            melody: Cleaned melody without conflicts
+        """
+        if len(melody) <= 1:
+            return melody
+        
+        sorted_melody = sorted(melody, key=lambda x: (x['start_time'], x['pitch']))
+        cleaned_melody = []
+        
+        for note in sorted_melody:
+            should_add = True
+            
+            for existing_note in cleaned_melody:
+                existing_end = existing_note['start_time'] + existing_note['duration']
+                note_start = note['start_time']
+                note_end = note['start_time'] + note['duration']
+                
+                # Check if notes are truly simultaneous (same start time)
+                if abs(existing_note['start_time'] - note_start) < 0.01:
+                    # Simultaneous notes are OK - this creates harmony
+                    continue
+                
+                # Check for problematic overlaps
+                elif (note_start < existing_end - min_gap and 
+                      note_end > existing_note['start_time'] + min_gap):
+                    
+                    # Notes overlap but aren't simultaneous - this sounds bad
+                    print(f"    Removing conflicting note: pitch {note['pitch']} at {note_start:.2f}s")
+                    should_add = False
+                    break
+            
+            if should_add:
+                cleaned_melody.append(note)
+        
+        return cleaned_melody
+
+    def _enhance_note_timing(self, melody):
+        """
+        Master function to enhance note timing for better musical quality
+        """
+        if not melody:
+            return melody
+        
+        print(f"Enhancing timing for {len(melody)} notes...")
+        
+        # Step 1: Remove obvious conflicts
+        melody = self._remove_timing_conflicts(melody, min_gap=0.05)
+        print(f"  After conflict removal: {len(melody)} notes")
+        
+        # Step 2: Align simultaneous notes
+        melody = self._align_simultaneous_notes(melody, tolerance=0.15)
+        print(f"  After alignment: {len(melody)} notes")
+        
+        # Step 3: Quantize to musical grid (optional - comment out if too rigid)
+        # melody = self._quantize_note_timing(melody, beat_duration=0.25)
+        # print(f"  After quantization: {len(melody)} notes")
+        
+        # Step 4: Final cleanup
+        melody = sorted(melody, key=lambda x: x['start_time'])
+        
+        # Step 5: Report simultaneous note groups
+        self._report_simultaneous_groups(melody)
+        
+        return melody
+
+    def _report_simultaneous_groups(self, melody):
+        """Report groups of simultaneous notes for debugging"""
+        simultaneous_groups = []
+        i = 0
+        
+        while i < len(melody):
+            current_time = melody[i]['start_time']
+            group = [melody[i]]
+            
+            j = i + 1
+            while j < len(melody) and abs(melody[j]['start_time'] - current_time) < 0.01:
+                group.append(melody[j])
+                j += 1
+            
+            if len(group) > 1:
+                pitches = [note['pitch'] for note in group]
+                simultaneous_groups.append((current_time, pitches))
+            
+            i = j
+        
+        if simultaneous_groups:
+            print(f"  Found {len(simultaneous_groups)} simultaneous note groups:")
+            for time, pitches in simultaneous_groups[:5]:  # Show first 5
+                print(f"    {time:.2f}s: pitches {pitches}")
+            if len(simultaneous_groups) > 5:
+                print(f"    ... and {len(simultaneous_groups) - 5} more groups")
+
+    def _calculate_song_bpm(self, chord_times):
+        """Calculate BPM from chord timing for better quantization"""
+        if len(chord_times) < 4:
+            return 120  # Default BPM
+        
+        # Calculate average chord duration
+        durations = [end - start for start, end in chord_times]
+        avg_chord_duration = sum(durations) / len(durations)
+        
+        # Estimate BPM (assuming 1 chord = 1 beat roughly)
+        estimated_bpm = 60.0 / avg_chord_duration
+        
+        # Snap to common BPM values
+        common_bpms = [60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 180]
+        closest_bpm = min(common_bpms, key=lambda x: abs(x - estimated_bpm))
+        
+        print(f"  Estimated BPM: {estimated_bpm:.1f} -> Using: {closest_bpm}")
+        return closest_bpm
+
+    def _enhance_note_timing_with_bpm(self, melody, beat_duration):
+        """Enhanced timing with BPM awareness"""
+        if not melody:
+            return melody
+        
+        print(f"Enhancing timing for {len(melody)} notes (beat={beat_duration:.3f}s)...")
+        
+        # Step 1: Remove conflicts
+        melody = self._remove_timing_conflicts(melody)
+        
+        # Step 2: Align simultaneous notes  
+        melody = self._align_simultaneous_notes(melody, tolerance=beat_duration * 0.5)
+        
+        # Step 3: Light quantization (only if notes are close to beat grid)
+        quantized_melody = []
+        for note in melody:
+            quantized_note = note.copy()
+            
+            # Only quantize if note is close to a beat boundary
+            closest_beat_time = round(note['start_time'] / beat_duration) * beat_duration
+            time_diff = abs(note['start_time'] - closest_beat_time)
+            
+            if time_diff < beat_duration * 0.3:  # Within 30% of beat duration
+                quantized_note['start_time'] = closest_beat_time
+            
+            quantized_melody.append(quantized_note)
+        
+        self._report_simultaneous_groups(quantized_melody)
+        return sorted(quantized_melody, key=lambda x: x['start_time'])
+    
+    # END OF TIMING ENHANCEMENT METHODS
+
+    def forward(self, full_chord_sequence, chord_mask, focus_positions, chord_durations=None,
                 melody_pitch=None, training=True):
         batch_size = full_chord_sequence.size(0)
         chord_seq_len = full_chord_sequence.size(1)
@@ -129,16 +375,12 @@ class AttentionChordToMelodyTransformer(nn.Module):
         chord_pos_emb = self.chord_position_embedding(chord_positions).unsqueeze(0).expand(batch_size, -1, -1)
         chord_embedded = chord_embedded + chord_pos_emb
         
-        # Add segment position information
-        if segment_position is not None:
-            segment_pos_emb = self.segment_position_embedding(segment_position.unsqueeze(-1))
-            segment_pos_emb = segment_pos_emb.unsqueeze(1).expand(-1, chord_seq_len, -1)
-            chord_embedded = chord_embedded + segment_pos_emb
+        # Add chord duration information if available
+        if chord_durations is not None:
+            duration_emb = chord_durations.unsqueeze(-1).expand(-1, -1, self.d_model) * 0.1
+            chord_embedded = chord_embedded + duration_emb
         
         chord_embedded = self.dropout(chord_embedded)
-        
-        # Create distance-aware attention mask
-        # distance_mask = self.create_distance_attention_mask(chord_seq_len, focus_positions)
         
         # Apply padding mask for chord sequence
         padding_mask = ~chord_mask  # Invert because True means "ignore"
@@ -189,45 +431,57 @@ class AttentionChordToMelodyTransformer(nn.Module):
             start_pred = self.start_head(decoded).squeeze(-1)
             
             return pitch_logits, duration_pred, start_pred
+        
         else:
             # Generation mode
             generated_sequence = []
             current_input = torch.zeros(batch_size, 1, dtype=torch.long, device=full_chord_sequence.device)
             
             for i in range(self.max_melody_length):
-                # Embed current sequence
                 melody_embedded = self.note_embedding(current_input)
                 melody_seq_len = current_input.size(1)
                 
-                # Add positional encoding
+                # Add positional encoding for current sequence
                 melody_positions = torch.arange(melody_seq_len, device=current_input.device)
                 melody_pos_emb = self.position_embedding(melody_positions).unsqueeze(0).expand(batch_size, -1, -1)
                 melody_embedded = melody_embedded + melody_pos_emb
                 melody_embedded = self.dropout(melody_embedded)
                 
-                # Decode
+                # Create causal mask for current sequence
+                causal_mask = torch.triu(torch.ones(melody_seq_len, melody_seq_len, device=current_input.device), diagonal=1).bool()
+                
+                # Decode current sequence
                 decoded = self.melody_decoder(
-                    melody_embedded, 
+                    melody_embedded,
                     chord_encoded,
+                    tgt_mask=causal_mask,
                     memory_key_padding_mask=padding_mask
                 )
                 
-                # Get predictions for the last position
-                last_output = decoded[:, -1:]
-                pitch_logits = self.pitch_head(last_output)
-                duration_pred = self.duration_head(last_output).squeeze(-1)
-                start_pred = self.start_head(last_output).squeeze(-1)
+                # Generate predictions for next token
+                last_decoded = decoded[:, -1:]
+                pitch_logits = self.pitch_head(last_decoded)
+                duration_pred = self.duration_head(last_decoded).squeeze(-1)
+                start_pred = self.start_head(last_decoded).squeeze(-1)
                 
-                # Sample next note (greedy for now, could add temperature)
-                next_pitch = torch.argmax(pitch_logits, dim=-1)
-                current_input = torch.cat([current_input, next_pitch], dim=1)
+                # Sample next pitch
+                pitch_probs = torch.softmax(pitch_logits.squeeze(1), dim=-1)
+                next_pitch = torch.multinomial(pitch_probs, 1)
                 
+                # Store predictions
                 generated_sequence.append({
-                    'pitch': next_pitch.squeeze(-1),
+                    'pitch': next_pitch,
                     'duration': duration_pred,
                     'start': start_pred
                 })
-                          
+                
+                # Early stopping if we generate a rest or reach max length
+                if next_pitch.item() == 0 or len(generated_sequence) >= self.max_melody_length:
+                    break
+                
+                # Update input sequence for next iteration
+                current_input = torch.cat([current_input, next_pitch], dim=1)
+            
             return generated_sequence
     
     def generate_full_song_melody(self, full_chord_sequence, vocab_path, segment_length=16, overlap=4, 
@@ -717,3 +971,368 @@ class AttentionChordToMelodyTransformer(nn.Module):
             adjusted_logits[:, :, 0] += abs(bias)
         
         return adjusted_logits
+    
+    def generate_chord_aligned_melody(self, chord_sequence, chord_times, vocab_path, temperature=1.0):
+        """
+        Generate melody that aligns with real song timing by processing chord-by-chord
+        ENHANCED: Now uses timing enhancement methods
+        
+        Args:
+            chord_sequence: List of chord symbols ['C:maj', 'Am:min', ...]
+            chord_times: List of (start_time, end_time) tuples for each chord
+            vocab_path: Path to vocabulary file
+            temperature: Sampling temperature
+        
+        Returns:
+            List of melody notes with absolute timing
+        """
+        self.eval()
+        device = next(self.parameters()).device
+        
+        with open(vocab_path, 'r') as f:
+            vocabularies = json.load(f)
+        
+        chord_to_idx = vocabularies['chord_vocab']
+        idx_to_note = vocabularies['idx_to_note']
+        
+        # Convert chord sequence to indices
+        chord_indices = []
+        for chord in chord_sequence:
+            chord_idx = chord_to_idx.get(chord, chord_to_idx.get('<UNK>', 0))
+            chord_indices.append(chord_idx)
+        
+        # Limit to model's maximum chord length
+        if len(chord_indices) > self.max_chord_length:
+            print(f"Warning: Chord sequence too long, using sliding window approach")
+            return self._generate_with_sliding_window(chord_sequence, chord_times, vocab_path, temperature)
+        
+        # Calculate BPM for better timing
+        song_bpm = self._calculate_song_bpm(chord_times)
+        beat_duration = 60.0 / (song_bpm * 4)  # 16th note duration
+        
+        # Prepare full chord context
+        padded_chords = chord_indices + [chord_to_idx.get('<PAD>', 0)] * (self.max_chord_length - len(chord_indices))
+        chord_mask = [True] * len(chord_indices) + [False] * (self.max_chord_length - len(chord_indices))
+        
+        # Calculate normalized chord durations
+        chord_durations = [end - start for start, end in chord_times[:len(chord_indices)]]
+        max_duration = max(chord_durations) if chord_durations else 4.0
+        normalized_durations = [d / max_duration for d in chord_durations]
+        normalized_durations += [0.0] * (self.max_chord_length - len(normalized_durations))
+        
+        # Generate melody for each chord
+        full_melody = []
+        
+        print(f"Generating melody for {len(chord_indices)} chords...")
+        
+        for focus_idx in range(len(chord_indices)):
+            chord_start, chord_end = chord_times[focus_idx]
+            chord_duration = chord_end - chord_start
+            current_chord = chord_sequence[focus_idx]
+            
+            print(f"  Chord {focus_idx + 1}/{len(chord_indices)}: {current_chord} ({chord_duration:.2f}s)")
+            
+            # Create tensors for this generation
+            chord_tensor = torch.tensor([padded_chords], dtype=torch.long, device=device)
+            chord_duration_tensor = torch.tensor([normalized_durations], dtype=torch.float32, device=device)
+            chord_mask_tensor = torch.tensor([chord_mask], dtype=torch.bool, device=device)
+            focus_tensor = torch.tensor([focus_idx], dtype=torch.long, device=device)
+            target_duration_tensor = torch.tensor([chord_duration], dtype=torch.float32, device=device)
+            
+            # Generate melody notes for this specific chord
+            with torch.no_grad():
+                chord_melody = self._generate_single_chord_melody(
+                    chord_tensor, 
+                    chord_duration_tensor,
+                    chord_mask_tensor, 
+                    focus_tensor,
+                    target_duration_tensor,
+                    temperature
+                )
+            
+            # Convert to absolute timing
+            for note_info in chord_melody:
+                pitch_idx = note_info['pitch'].item()
+                if pitch_idx > 0:  # Skip rest notes
+                    pitch = int(idx_to_note.get(str(pitch_idx), 60))
+                    
+                    # Convert relative timing to absolute timing
+                    relative_start = note_info['start'].item()  # 0.0 to 1.0
+                    relative_duration = note_info['duration'].item()  # 0.0 to 1.0
+                    
+                    absolute_start = chord_start + (relative_start * chord_duration)
+                    absolute_duration = max(0.1, relative_duration * chord_duration)
+                    
+                    # Ensure note doesn't extend beyond chord boundary
+                    if absolute_start + absolute_duration > chord_end:
+                        absolute_duration = chord_end - absolute_start
+                    
+                    if absolute_duration > 0.05:  # Minimum note duration
+                        full_melody.append({
+                            'pitch': pitch,
+                            'start_time': absolute_start,
+                            'duration': absolute_duration,
+                            'chord': current_chord,
+                            'chord_index': focus_idx
+                        })
+        
+        # Sort by start time and apply ENHANCED timing cleanup
+        full_melody.sort(key=lambda x: x['start_time'])
+        
+        # ENHANCED: Use new timing enhancement instead of just removing overlaps
+        cleaned_melody = self._enhance_note_timing_with_bpm(full_melody, beat_duration)
+        
+        print(f"Generated {len(cleaned_melody)} notes total")
+        return cleaned_melody
+
+    def _generate_single_chord_melody(self, chord_tensor, chord_durations, chord_mask, focus_position, target_duration, temperature):
+        """Generate melody for a single chord using the trained model"""
+        
+        # This uses the same generation logic as your current model but focuses on one chord
+        batch_size = chord_tensor.size(0)
+        device = chord_tensor.device
+        
+        # Encode chord context (same as your current model)
+        chord_embedded = self.chord_embedding(chord_tensor)
+        chord_seq_len = chord_tensor.size(1)
+        
+        chord_positions = torch.arange(chord_seq_len, device=device)
+        chord_pos_emb = self.chord_position_embedding(chord_positions).unsqueeze(0).expand(batch_size, -1, -1)
+        chord_embedded = chord_embedded + chord_pos_emb
+        chord_embedded = self.dropout(chord_embedded)
+        
+        padding_mask = ~chord_mask
+        chord_encoded = self.chord_encoder(chord_embedded, src_key_padding_mask=padding_mask)
+        
+        focus_context, _ = self.focus_attention(chord_encoded, chord_encoded, chord_encoded, key_padding_mask=padding_mask)
+        chord_encoded = chord_encoded + self.focus_projection(focus_context)
+        chord_encoded = self.layer_norm(chord_encoded)
+        
+        # Generate melody (adapted from your existing generation)
+        generated_sequence = []
+        current_input = torch.zeros(batch_size, 1, dtype=torch.long, device=device)
+        
+        # Reduce max length for single chord generation
+        max_notes_per_chord = 8  # Reasonable limit for one chord
+        
+        for i in range(max_notes_per_chord):
+            melody_embedded = self.note_embedding(current_input)
+            melody_seq_len = current_input.size(1)
+            
+            melody_positions = torch.arange(melody_seq_len, device=device)
+            melody_pos_emb = self.position_embedding(melody_positions).unsqueeze(0).expand(batch_size, -1, -1)
+            melody_embedded = melody_embedded + melody_pos_emb
+            melody_embedded = self.dropout(melody_embedded)
+            
+            decoded = self.melody_decoder(melody_embedded, chord_encoded, memory_key_padding_mask=padding_mask)
+            
+            last_output = decoded[:, -1:]
+            pitch_logits = self.pitch_head(last_output)
+            duration_pred = self.duration_head(last_output).squeeze(-1)
+            start_pred = self.start_head(last_output).squeeze(-1)
+            
+            # Apply temperature
+            if temperature != 1.0:
+                pitch_logits = pitch_logits / temperature
+            
+            pitch_probs = torch.softmax(pitch_logits.squeeze(1), dim=-1)
+            next_pitch = torch.multinomial(pitch_probs, 1)
+            
+            current_input = torch.cat([current_input, next_pitch], dim=1)
+            
+            generated_sequence.append({
+                'pitch': next_pitch.squeeze(-1),
+                'duration': torch.clamp(duration_pred, 0.0, 1.0),  # Clamp to 0-1 range
+                'start': torch.clamp(start_pred, 0.0, 1.0)
+            })
+            
+            # Early stopping if we generate a rest
+            if next_pitch.item() == 0:
+                break
+        
+        return generated_sequence
+
+    def _remove_overlapping_notes(self, melody):
+        """Remove overlapping notes to create clean melody line"""
+        if len(melody) <= 1:
+            return melody
+        
+        cleaned = [melody[0]]
+        
+        for note in melody[1:]:
+            last_note = cleaned[-1]
+            
+            # If notes overlap, keep the one that starts first
+            if note['start_time'] < last_note['start_time'] + last_note['duration']:
+                # Shorten the previous note
+                if last_note['start_time'] + 0.1 < note['start_time']:
+                    last_note['duration'] = note['start_time'] - last_note['start_time']
+                    cleaned.append(note)
+                # Otherwise skip the new note if it's too close
+            else:
+                cleaned.append(note)
+        
+        return cleaned
+
+    def _generate_with_sliding_window(self, chord_sequence, chord_times, vocab_path, temperature):
+        """Handle very long chord sequences with sliding window approach"""
+        print(f"Using sliding window for {len(chord_sequence)} chords")
+        
+        window_size = self.max_chord_length - 2  # Leave room for context (10 for max_chord_length=12)
+        overlap = window_size // 3  # 1/3 overlap (3-4 chords)
+        full_melody = []
+        
+        num_windows = (len(chord_sequence) + window_size - overlap - 1) // (window_size - overlap)
+        print(f"Processing {num_windows} windows (window_size={window_size}, overlap={overlap})")
+        
+        for window_idx in range(num_windows):
+            start_idx = window_idx * (window_size - overlap)
+            end_idx = min(start_idx + window_size, len(chord_sequence))
+            
+            print(f"  Window {window_idx + 1}/{num_windows}: chords {start_idx}-{end_idx} ({end_idx - start_idx} chords)")
+            
+            # Extract window
+            window_chords = chord_sequence[start_idx:end_idx]
+            window_times = chord_times[start_idx:end_idx]
+            
+            # Adjust timing to start from 0 for this window
+            if window_times:
+                time_offset = window_times[0][0]
+                adjusted_times = [(start - time_offset, end - time_offset) for start, end in window_times]
+            else:
+                adjusted_times = []
+            
+            # Generate for this window (recursive call with smaller sequence)
+            if len(window_chords) <= self.max_chord_length:
+                window_melody = self._generate_window_melody(
+                    window_chords, 
+                    adjusted_times, 
+                    vocab_path, 
+                    temperature,
+                    time_offset
+                )
+            else:
+                # If still too long, truncate
+                window_chords = window_chords[:self.max_chord_length]
+                adjusted_times = adjusted_times[:self.max_chord_length]
+                window_melody = self._generate_window_melody(
+                    window_chords, 
+                    adjusted_times, 
+                    vocab_path, 
+                    temperature,
+                    time_offset
+                )
+            
+            # Handle overlap - only add non-overlapping notes
+            if window_idx == 0:
+                # First window - add all notes
+                full_melody.extend(window_melody)
+                print(f"    Added {len(window_melody)} notes from first window")
+            else:
+                # Subsequent windows - filter overlap region
+                overlap_chord_count = overlap
+                if start_idx + overlap_chord_count < len(chord_times):
+                    overlap_end_time = chord_times[start_idx + overlap_chord_count][0]
+                else:
+                    overlap_end_time = chord_times[-1][1]  # End of song
+                
+                new_notes = 0
+                for note in window_melody:
+                    if note['start_time'] >= overlap_end_time:
+                        full_melody.append(note)
+                        new_notes += 1
+                
+                print(f"    Added {new_notes} notes from window {window_idx + 1} (after overlap filtering)")
+        
+        print(f"Sliding window complete: {len(full_melody)} total notes")
+        return full_melody
+    def _generate_window_melody(self, chord_sequence, chord_times, vocab_path, temperature, time_offset):
+        """
+        Generate melody for a single window
+        ENHANCED: Apply timing enhancement to window melody
+        """
+        
+        with open(vocab_path, 'r') as f:
+            vocabularies = json.load(f)
+        
+        chord_to_idx = vocabularies['chord_vocab']
+        idx_to_note = vocabularies['idx_to_note']
+        device = next(self.parameters()).device
+        
+        # Convert chord sequence to indices
+        chord_indices = []
+        for chord in chord_sequence:
+            chord_idx = chord_to_idx.get(chord, chord_to_idx.get('<UNK>', 0))
+            chord_indices.append(chord_idx)
+        
+        # Prepare model inputs
+        original_length = len(chord_indices)
+        padded_chords = chord_indices + [chord_to_idx.get('<PAD>', 0)] * (self.max_chord_length - len(chord_indices))
+        chord_mask = [True] * original_length + [False] * (self.max_chord_length - original_length)
+        
+        # Calculate normalized chord durations
+        chord_durations = [end - start for start, end in chord_times[:original_length]]
+        max_duration = max(chord_durations) if chord_durations else 4.0
+        normalized_durations = [d / max_duration for d in chord_durations]
+        normalized_durations += [0.0] * (self.max_chord_length - len(normalized_durations))
+        
+        # Generate melody for each chord
+        window_melody = []
+        
+        for focus_idx in range(original_length):
+            if focus_idx >= len(chord_times):
+                break
+                
+            chord_start, chord_end = chord_times[focus_idx]
+            chord_duration = chord_end - chord_start
+            current_chord = chord_sequence[focus_idx]
+            
+            # Create tensors for this generation
+            chord_tensor = torch.tensor([padded_chords], dtype=torch.long, device=device)
+            chord_duration_tensor = torch.tensor([normalized_durations], dtype=torch.float32, device=device)
+            chord_mask_tensor = torch.tensor([chord_mask], dtype=torch.bool, device=device)
+            focus_tensor = torch.tensor([focus_idx], dtype=torch.long, device=device)
+            target_duration_tensor = torch.tensor([chord_duration], dtype=torch.float32, device=device)
+            
+            # Generate melody notes for this specific chord
+            with torch.no_grad():
+                chord_melody = self._generate_single_chord_melody(
+                    chord_tensor, 
+                    chord_duration_tensor,
+                    chord_mask_tensor, 
+                    focus_tensor,
+                    target_duration_tensor,
+                    temperature
+                )
+            
+            # Convert to absolute timing (add back the time offset)
+            for note_info in chord_melody:
+                pitch_idx = note_info['pitch'].item()
+                if pitch_idx > 0:  # Skip rest notes
+                    pitch = int(idx_to_note.get(str(pitch_idx), 60))
+                    
+                    # Convert relative timing to absolute timing
+                    relative_start = max(0.0, min(1.0, note_info['start'].item()))
+                    relative_duration = max(0.0, min(1.0, note_info['duration'].item()))
+                    
+                    absolute_start = time_offset + chord_start + (relative_start * chord_duration)
+                    absolute_duration = max(0.1, relative_duration * chord_duration * 0.5)
+                    
+                    # Ensure note doesn't extend beyond chord boundary
+                    chord_end_absolute = time_offset + chord_end
+                    if absolute_start + absolute_duration > chord_end_absolute:
+                        absolute_duration = max(0.1, chord_end_absolute - absolute_start)
+                    
+                    if absolute_duration > 0.05:  # Minimum note duration
+                        window_melody.append({
+                            'pitch': pitch,
+                            'start_time': absolute_start,
+                            'duration': absolute_duration,
+                            'chord': current_chord,
+                            'chord_index': focus_idx
+                        })
+        
+        # ENHANCED: Apply timing enhancement to window melody
+        enhanced_melody = self._enhance_note_timing(window_melody)
+        
+        return enhanced_melody
