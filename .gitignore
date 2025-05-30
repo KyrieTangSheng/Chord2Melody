@@ -179,5 +179,7 @@ training_history.png
 *.pt
 POP909-Dataset/
 .DS_Store
+generated_real_song_aligned/
+generated_real_song/
 
 
