@@ -1,0 +1,32 @@
+{
+  "song_id": "021",
+  "scores": {
+    "chord_alignment": 0.47317073170731705,
+    "timing_accuracy": 0.9909039388072404,
+    "note_density": 0.790714962040085,
+    "overall": 0.7515965441848808
+  },
+  "melody_stats": {
+    "num_notes": 615,
+    "duration": 234.03116737742013,
+    "pitch_range": 106,
+    "avg_note_duration": 0.22870369392844384
+  },
+  "chord_progression": [
+    "F:min7",
+    "F:min7",
+    "Eb:maj",
+    "Bb:maj",
+    "F:min7",
+    "Bb:7",
+    "Ab:maj7",
+    "Ab:maj",
+    "F:min7",
+    "G:min7"
+  ],
+  "timing_info": {
+    "expected_duration": 236.1794702916667,
+    "generated_duration": 234.03116737742013,
+    "coverage_ratio": 0.9909039388072404
+  }
+}

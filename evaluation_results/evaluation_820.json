@@ -1,0 +1,32 @@
+{
+  "song_id": "820",
+  "scores": {
+    "chord_alignment": 0.407158836689038,
+    "timing_accuracy": 0.996325559525669,
+    "note_density": 0.768672759438748,
+    "overall": 0.7240523852178183
+  },
+  "melody_stats": {
+    "num_notes": 447,
+    "duration": 165.92540194393825,
+    "pitch_range": 124,
+    "avg_note_duration": 0.20211141146662023
+  },
+  "chord_progression": [
+    "B:maj",
+    "F#:maj",
+    "B:maj",
+    "E:maj",
+    "F#:maj",
+    "B:maj",
+    "E:maj",
+    "F#:maj",
+    "B:maj",
+    "E:maj"
+  ],
+  "timing_info": {
+    "expected_duration": 166.53733346250002,
+    "generated_duration": 165.92540194393825,
+    "coverage_ratio": 0.996325559525669
+  }
+}

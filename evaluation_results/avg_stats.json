@@ -1,0 +1,15 @@
+{
+  "scores": {
+    "chord_alignment": 0.49826394969757143,
+    "timing_accuracy": 0.9961687143542196,
+    "note_density": 0.8223653962649682,
+    "overall": 0.7722660201055864
+  },
+  "melody_stats": {
+    "num_notes": 605.0873786407767,
+    "duration": 244.78508420856593,
+    "pitch_range": 68.0873786407767,
+    "avg_note_duration": 0.23059946917846366
+  },
+  "num_songs_analyzed": 103
+}

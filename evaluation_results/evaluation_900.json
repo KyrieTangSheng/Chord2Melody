@@ -1,0 +1,32 @@
+{
+  "song_id": "900",
+  "scores": {
+    "chord_alignment": 0.5081585081585082,
+    "timing_accuracy": 0.9963498196963755,
+    "note_density": 1.0,
+    "overall": 0.8348361092849612
+  },
+  "melody_stats": {
+    "num_notes": 429,
+    "duration": 274.0596240793074,
+    "pitch_range": 52,
+    "avg_note_duration": 0.3284501359003088
+  },
+  "chord_progression": [
+    "F:maj",
+    "A:min",
+    "Bb:maj",
+    "Bb:min",
+    "F:maj",
+    "A:min",
+    "F:maj",
+    "Bb:maj",
+    "Bb:min",
+    "F:maj"
+  ],
+  "timing_info": {
+    "expected_duration": 275.06365601875,
+    "generated_duration": 274.0596240793074,
+    "coverage_ratio": 0.9963498196963755
+  }
+}

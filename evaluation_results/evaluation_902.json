@@ -1,0 +1,32 @@
+{
+  "song_id": "902",
+  "scores": {
+    "chord_alignment": 0.5156017830609212,
+    "timing_accuracy": 0.9979385191049331,
+    "note_density": 0.8639167001441277,
+    "overall": 0.7924856674366607
+  },
+  "melody_stats": {
+    "num_notes": 673,
+    "duration": 279.4560481953439,
+    "pitch_range": 98,
+    "avg_note_duration": 0.2410155454623297
+  },
+  "chord_progression": [
+    "F:min",
+    "Eb:maj",
+    "Eb:maj",
+    "Eb:maj",
+    "Ab:maj7",
+    "C:min7",
+    "Ab:maj7",
+    "G:min7",
+    "F:min7",
+    "Bb:7"
+  ],
+  "timing_info": {
+    "expected_duration": 280.0333315583333,
+    "generated_duration": 279.4560481953439,
+    "coverage_ratio": 0.9979385191049331
+  }
+}

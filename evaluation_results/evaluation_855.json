@@ -1,0 +1,32 @@
+{
+  "song_id": "855",
+  "scores": {
+    "chord_alignment": 0.4974182444061962,
+    "timing_accuracy": 0.9961901805833425,
+    "note_density": 1.0,
+    "overall": 0.8312028083298463
+  },
+  "melody_stats": {
+    "num_notes": 581,
+    "duration": 339.42429578603196,
+    "pitch_range": 118,
+    "avg_note_duration": 0.2947366089631802
+  },
+  "chord_progression": [
+    "Bb:min",
+    "F:min",
+    "Bb:min",
+    "Eb:min",
+    "F:min",
+    "Eb:min",
+    "Bb:min",
+    "F:min",
+    "Bb:min",
+    "F:min"
+  ],
+  "timing_info": {
+    "expected_duration": 340.72238655,
+    "generated_duration": 339.42429578603196,
+    "coverage_ratio": 0.9961901805833425
+  }
+}

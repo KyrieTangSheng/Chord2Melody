@@ -1,0 +1,3621 @@
+[
+  {
+    "pitch": 65,
+    "start_time": 2.8454815583333333,
+    "duration": 0.4445478676551551,
+    "chord": "F#:maj7",
+    "chord_index": 0
+  },
+  {
+    "pitch": 68,
+    "start_time": 3.7923117810475233,
+    "duration": 0.26420135689414925,
+    "chord": "F#:maj7",
+    "chord_index": 0
+  },
+  {
+    "pitch": 70,
+    "start_time": 4.036320460731412,
+    "duration": 0.21836943304498718,
+    "chord": "F#:maj7",
+    "chord_index": 0
+  },
+  {
+    "pitch": 80,
+    "start_time": 4.4054205051103645,
+    "duration": 0.2087638872636471,
+    "chord": "F#:maj7",
+    "chord_index": 0
+  },
+  {
+    "pitch": 70,
+    "start_time": 5.3298525833333334,
+    "duration": 0.41627822687484806,
+    "chord": "F:min7",
+    "chord_index": 1
+  },
+  {
+    "pitch": 73,
+    "start_time": 6.338929160194556,
+    "duration": 0.23826206475642317,
+    "chord": "F:min7",
+    "chord_index": 1
+  },
+  {
+    "pitch": 72,
+    "start_time": 6.632916979331782,
+    "duration": 0.15504893356808022,
+    "chord": "F:min7",
+    "chord_index": 1
+  },
+  {
+    "pitch": 70,
+    "start_time": 6.894011630514561,
+    "duration": 0.10957332653018487,
+    "chord": "F:min7",
+    "chord_index": 1
+  },
+  {
+    "pitch": 72,
+    "start_time": 6.894011630514561,
+    "duration": 0.10957332653018487,
+    "chord": "F:min7",
+    "chord_index": 1
+  },
+  {
+    "pitch": 73,
+    "start_time": 7.078972469765484,
+    "duration": 0.1,
+    "chord": "F:min7",
+    "chord_index": 1
+  },
+  {
+    "pitch": 65,
+    "start_time": 7.656237749999999,
+    "duration": 0.3010250760012896,
+    "chord": "Eb:min",
+    "chord_index": 2
+  },
+  {
+    "pitch": 68,
+    "start_time": 8.297382743577952,
+    "duration": 0.17890364418618498,
+    "chord": "Eb:min",
+    "chord_index": 2
+  },
+  {
+    "pitch": 63,
+    "start_time": 8.46261293967417,
+    "duration": 0.14786860979775865,
+    "chord": "Eb:min",
+    "chord_index": 2
+  },
+  {
+    "pitch": 63,
+    "start_time": 8.768624587433834,
+    "duration": 0.10495222355314426,
+    "chord": "Eb:min",
+    "chord_index": 2
+  },
+  {
+    "pitch": 65,
+    "start_time": 8.768624587433834,
+    "duration": 0.10495222355314426,
+    "chord": "Eb:min",
+    "chord_index": 2
+  },
+  {
+    "pitch": 65,
+    "start_time": 8.768624587433834,
+    "duration": 0.10495222355314426,
+    "chord": "Eb:min",
+    "chord_index": 2
+  },
+  {
+    "pitch": 61,
+    "start_time": 8.936423925356351,
+    "duration": 0.1,
+    "chord": "Eb:min",
+    "chord_index": 2
+  },
+  {
+    "pitch": 63,
+    "start_time": 8.936423925356351,
+    "duration": 0.1,
+    "chord": "Eb:min",
+    "chord_index": 2
+  },
+  {
+    "pitch": 58,
+    "start_time": 9.338526725,
+    "duration": 0.29108410341920343,
+    "chord": "F#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 61,
+    "start_time": 9.794209085285864,
+    "duration": 0.24871937706281333,
+    "chord": "F#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 65,
+    "start_time": 10.234414357116338,
+    "duration": 0.118430269376327,
+    "chord": "F#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 68,
+    "start_time": 10.234414357116338,
+    "duration": 0.118430269376327,
+    "chord": "F#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 63,
+    "start_time": 10.340522324853207,
+    "duration": 0.1119088519404164,
+    "chord": "F#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 70,
+    "start_time": 10.340522324853207,
+    "duration": 0.1119088519404164,
+    "chord": "F#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 75,
+    "start_time": 10.629125781299921,
+    "duration": 0.1,
+    "chord": "F#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 77,
+    "start_time": 10.965260233333332,
+    "duration": 0.6328050359284075,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 68,
+    "start_time": 12.568386187702579,
+    "duration": 0.268246821116718,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 70,
+    "start_time": 13.43723728390687,
+    "duration": 0.22220386247094134,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 73,
+    "start_time": 13.76525280054879,
+    "duration": 0.1613597609628284,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 72,
+    "start_time": 14.501712908333333,
+    "duration": 0.7455729436564443,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 70,
+    "start_time": 16.63211510452369,
+    "duration": 0.349499688387364,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 65,
+    "start_time": 17.09560902140239,
+    "duration": 0.27878662047982206,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 77,
+    "start_time": 17.56400019707182,
+    "duration": 0.22281740531511596,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 78,
+    "start_time": 18.668372908333332,
+    "duration": 0.298229177462578,
+    "chord": "F#:min",
+    "chord_index": 6
+  },
+  {
+    "pitch": 63,
+    "start_time": 18.937226256807715,
+    "duration": 0.2763109455201627,
+    "chord": "F#:min",
+    "chord_index": 6
+  },
+  {
+    "pitch": 80,
+    "start_time": 19.36205333654788,
+    "duration": 0.13068399282133586,
+    "chord": "F#:min",
+    "chord_index": 6
+  },
+  {
+    "pitch": 65,
+    "start_time": 19.602729652534038,
+    "duration": 0.12501175071215637,
+    "chord": "F#:min",
+    "chord_index": 6
+  },
+  {
+    "pitch": 65,
+    "start_time": 19.794102873386414,
+    "duration": 0.12701965413510807,
+    "chord": "F#:min",
+    "chord_index": 6
+  },
+  {
+    "pitch": 77,
+    "start_time": 19.794102873386414,
+    "duration": 0.12701965413510807,
+    "chord": "F#:min",
+    "chord_index": 6
+  },
+  {
+    "pitch": 68,
+    "start_time": 20.335036908333333,
+    "duration": 0.4473437661938666,
+    "chord": "F:min7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 70,
+    "start_time": 20.897998375724228,
+    "duration": 0.33110796581947793,
+    "chord": "F:min7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 73,
+    "start_time": 21.64203347233549,
+    "duration": 0.2082768289209902,
+    "chord": "F:min7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 77,
+    "start_time": 21.64203347233549,
+    "duration": 0.2082768289209902,
+    "chord": "F:min7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 70,
+    "start_time": 21.918619070652277,
+    "duration": 0.17034223056752978,
+    "chord": "F:min7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 77,
+    "start_time": 21.918619070652277,
+    "duration": 0.17034223056752978,
+    "chord": "F:min7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 73,
+    "start_time": 22.090893950794726,
+    "duration": 0.13284723439237472,
+    "chord": "F:min7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 73,
+    "start_time": 22.835032908333332,
+    "duration": 0.596458354925156,
+    "chord": "Bb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 77,
+    "start_time": 24.716594753405126,
+    "duration": 0.26161276165890707,
+    "chord": "Bb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 68,
+    "start_time": 25.26160186523584,
+    "duration": 0.17236890631914148,
+    "chord": "Bb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 72,
+    "start_time": 25.464626285383734,
+    "duration": 0.1,
+    "chord": "Bb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 61,
+    "start_time": 26.168360908333334,
+    "duration": 0.5964583549251553,
+    "chord": "Eb:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 58,
+    "start_time": 26.96655185413888,
+    "duration": 0.47375091609311076,
+    "chord": "Eb:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 63,
+    "start_time": 27.83048065748647,
+    "duration": 0.33750989178955537,
+    "chord": "Eb:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 73,
+    "start_time": 28.241456409836324,
+    "duration": 0.21037147558975208,
+    "chord": "Eb:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 58,
+    "start_time": 28.445019456429037,
+    "duration": 0.2603192435958384,
+    "chord": "Eb:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 65,
+    "start_time": 29.501688908333332,
+    "duration": 0.30046077179241193,
+    "chord": "Ab:7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 68,
+    "start_time": 30.10027196676305,
+    "duration": 0.18321903288823374,
+    "chord": "Ab:7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 65,
+    "start_time": 30.344572785728246,
+    "duration": 0.14452048116236932,
+    "chord": "Ab:7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 56,
+    "start_time": 30.344572785728246,
+    "duration": 0.14452048116236932,
+    "chord": "Ab:7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 65,
+    "start_time": 30.57581722814563,
+    "duration": 0.10242284071144464,
+    "chord": "Ab:7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 63,
+    "start_time": 30.57581722814563,
+    "duration": 0.10242284071144464,
+    "chord": "Ab:7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 73,
+    "start_time": 31.168352908333333,
+    "duration": 0.3004607717924113,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 68,
+    "start_time": 31.63837570887235,
+    "duration": 0.21049386359786953,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 72,
+    "start_time": 32.076957059928205,
+    "duration": 0.12831295488992311,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 75,
+    "start_time": 32.076957059928205,
+    "duration": 0.12831295488992311,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 77,
+    "start_time": 32.25734128802898,
+    "duration": 0.11673062368419747,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 73,
+    "start_time": 32.25734128802898,
+    "duration": 0.11673062368419747,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 73,
+    "start_time": 32.83501690833333,
+    "duration": 0.3004607717924126,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 73,
+    "start_time": 33.48590022699335,
+    "duration": 0.1314957571138147,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 70,
+    "start_time": 33.74233563814977,
+    "duration": 0.1,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 68,
+    "start_time": 33.95984674534944,
+    "duration": 0.1,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 70,
+    "start_time": 34.1928792745786,
+    "duration": 0.1,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 68,
+    "start_time": 34.501680908333334,
+    "duration": 0.3004607717924113,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 70,
+    "start_time": 34.882208272663625,
+    "duration": 0.22020664844095672,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 63,
+    "start_time": 35.302285788719445,
+    "duration": 0.15064751840114568,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 65,
+    "start_time": 35.597731433724675,
+    "duration": 0.1065174435299038,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 65,
+    "start_time": 35.597731433724675,
+    "duration": 0.1065174435299038,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 77,
+    "start_time": 35.792356231758625,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 63,
+    "start_time": 35.792356231758625,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 70,
+    "start_time": 36.16834490833333,
+    "duration": 0.6009215435848239,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 73,
+    "start_time": 36.801486932862076,
+    "duration": 0.5069257155435087,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 72,
+    "start_time": 37.51638196131328,
+    "duration": 0.34719838777875917,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 70,
+    "start_time": 38.42149790566543,
+    "duration": 0.15029241188043363,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 75,
+    "start_time": 38.42149790566543,
+    "duration": 0.15029241188043363,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 73,
+    "start_time": 38.69915606301358,
+    "duration": 0.19432896078705797,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 70,
+    "start_time": 39.50167290833333,
+    "duration": 0.3004607717924113,
+    "chord": "Bb:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 82,
+    "start_time": 39.8182439205977,
+    "duration": 0.25346285777175387,
+    "chord": "Bb:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 85,
+    "start_time": 40.091435387518914,
+    "duration": 0.18363252703213662,
+    "chord": "Bb:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 84,
+    "start_time": 40.508693409705906,
+    "duration": 0.10611251753997794,
+    "chord": "Bb:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 85,
+    "start_time": 40.508693409705906,
+    "duration": 0.10611251753997794,
+    "chord": "Bb:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 82,
+    "start_time": 40.680726957650535,
+    "duration": 0.10063478818246718,
+    "chord": "Bb:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 85,
+    "start_time": 40.680726957650535,
+    "duration": 0.10063478818246718,
+    "chord": "Bb:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 68,
+    "start_time": 40.680726957650535,
+    "duration": 0.10063478818246718,
+    "chord": "Bb:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 68,
+    "start_time": 41.16833690833333,
+    "duration": 0.6009215435848239,
+    "chord": "F#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 70,
+    "start_time": 41.92939163699391,
+    "duration": 0.44041329688191433,
+    "chord": "F#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 73,
+    "start_time": 42.89338694206956,
+    "duration": 0.2903107379089595,
+    "chord": "F#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 84,
+    "start_time": 43.32792059784558,
+    "duration": 0.22132227175927172,
+    "chord": "F#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 73,
+    "start_time": 43.586015449327974,
+    "duration": 0.18947518848216544,
+    "chord": "F#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 75,
+    "start_time": 44.50166490833333,
+    "duration": 0.5757804439854625,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 75,
+    "start_time": 45.36358176011566,
+    "duration": 0.44668642735481284,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 75,
+    "start_time": 45.793348542052776,
+    "duration": 0.33381999765276926,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 77,
+    "start_time": 46.07729776090911,
+    "duration": 0.27259825264322773,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 73,
+    "start_time": 46.76144324935487,
+    "duration": 0.1342311588975192,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 73,
+    "start_time": 47.03412651298669,
+    "duration": 0.10247243045479063,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 75,
+    "start_time": 47.03412651298669,
+    "duration": 0.10247243045479063,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 80,
+    "start_time": 47.834992908333334,
+    "duration": 0.2878902219927306,
+    "chord": "Ab:7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 82,
+    "start_time": 48.14119824242154,
+    "duration": 0.25788529182076414,
+    "chord": "Ab:7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 85,
+    "start_time": 48.68487520422652,
+    "duration": 0.12338395046782473,
+    "chord": "Ab:7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 80,
+    "start_time": 49.029000232426434,
+    "duration": 0.1,
+    "chord": "Ab:7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 75,
+    "start_time": 49.029000232426434,
+    "duration": 0.1,
+    "chord": "Ab:7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 80,
+    "start_time": 49.176213684383896,
+    "duration": 0.1,
+    "chord": "Ab:7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 70,
+    "start_time": 49.50165690833333,
+    "duration": 0.5757804439854625,
+    "chord": "C#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 70,
+    "start_time": 50.197770195572886,
+    "duration": 0.4703259890136721,
+    "chord": "C#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 77,
+    "start_time": 51.1303524129968,
+    "duration": 0.22784787716937077,
+    "chord": "C#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 70,
+    "start_time": 51.41869657330373,
+    "duration": 0.22509615864026558,
+    "chord": "C#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 73,
+    "start_time": 51.69421760953286,
+    "duration": 0.16086930126094826,
+    "chord": "C#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 70,
+    "start_time": 52.04355530393079,
+    "duration": 0.15266885768294342,
+    "chord": "C#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 70,
+    "start_time": 52.83498490833333,
+    "duration": 0.7197255549818278,
+    "chord": "F#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 80,
+    "start_time": 53.70512651738277,
+    "duration": 0.5879074862670899,
+    "chord": "F#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 82,
+    "start_time": 54.7978909942948,
+    "duration": 0.3312820545653999,
+    "chord": "F#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 84,
+    "start_time": 55.24186231024793,
+    "duration": 0.2760946679291129,
+    "chord": "F#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 70,
+    "start_time": 55.638733242025886,
+    "duration": 0.1817633594067395,
+    "chord": "F#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 68,
+    "start_time": 56.07201361280969,
+    "duration": 0.13527600181341173,
+    "chord": "F#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 61,
+    "start_time": 57.00164490833333,
+    "duration": 0.2878902219927306,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 63,
+    "start_time": 57.472759664217506,
+    "duration": 0.2141678880233761,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 65,
+    "start_time": 57.77644375070098,
+    "duration": 0.1511729449217913,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 65,
+    "start_time": 58.15405665124705,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 63,
+    "start_time": 58.15405665124705,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 61,
+    "start_time": 58.35976476623205,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 63,
+    "start_time": 58.35976476623205,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 72,
+    "start_time": 58.66830890833333,
+    "duration": 0.43183533298909715,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 75,
+    "start_time": 59.21727053366497,
+    "duration": 0.3326846179098491,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 77,
+    "start_time": 59.849777769742516,
+    "duration": 0.23883930377340346,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 80,
+    "start_time": 60.22736335153678,
+    "duration": 0.1430229090974854,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 75,
+    "start_time": 60.22736335153678,
+    "duration": 0.1430229090974854,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 77,
+    "start_time": 60.47614305502633,
+    "duration": 0.1,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 80,
+    "start_time": 60.47614305502633,
+    "duration": 0.1,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 75,
+    "start_time": 60.63893961972192,
+    "duration": 0.1,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 80,
+    "start_time": 61.16830490833333,
+    "duration": 0.43183533298909593,
+    "chord": "Bb:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 77,
+    "start_time": 61.62761290946564,
+    "duration": 0.38682793773114615,
+    "chord": "Bb:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 77,
+    "start_time": 62.40198064951208,
+    "duration": 0.2194626843234297,
+    "chord": "Bb:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 75,
+    "start_time": 62.978544843651804,
+    "duration": 0.1104357627890854,
+    "chord": "Bb:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 70,
+    "start_time": 62.978544843651804,
+    "duration": 0.1104357627890854,
+    "chord": "Bb:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 73,
+    "start_time": 63.141605456501274,
+    "duration": 0.105190473965682,
+    "chord": "Bb:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 75,
+    "start_time": 63.141605456501274,
+    "duration": 0.105190473965682,
+    "chord": "Bb:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 80,
+    "start_time": 63.66830090833333,
+    "duration": 0.6506246349155906,
+    "chord": "Bb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 80,
+    "start_time": 65.33285301980689,
+    "duration": 0.27828321038961423,
+    "chord": "Bb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 82,
+    "start_time": 65.58863134047654,
+    "duration": 0.23545843439006817,
+    "chord": "Bb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 68,
+    "start_time": 65.80714141992429,
+    "duration": 0.2319453919184209,
+    "chord": "Bb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 85,
+    "start_time": 66.15953166197923,
+    "duration": 0.16605282331782587,
+    "chord": "Bb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 73,
+    "start_time": 66.15953166197923,
+    "duration": 0.16605282331782587,
+    "chord": "Bb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 80,
+    "start_time": 67.00162890833333,
+    "duration": 0.4879684761866919,
+    "chord": "G:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 89,
+    "start_time": 67.94287668350246,
+    "duration": 0.3031317509922976,
+    "chord": "G:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 77,
+    "start_time": 68.37065704448965,
+    "duration": 0.14918323951283072,
+    "chord": "G:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 89,
+    "start_time": 68.63846401026395,
+    "duration": 0.14760062696751927,
+    "chord": "G:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 82,
+    "start_time": 69.50162490833333,
+    "duration": 0.3253123174577946,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 80,
+    "start_time": 70.33151246076396,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 82,
+    "start_time": 70.5951601714101,
+    "duration": 0.10000000000000002,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 85,
+    "start_time": 70.5951601714101,
+    "duration": 0.10000000000000002,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 84,
+    "start_time": 70.5951601714101,
+    "duration": 0.10000000000000002,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 82,
+    "start_time": 70.78700103962305,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 70,
+    "start_time": 70.78700103962305,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 77,
+    "start_time": 71.16828890833332,
+    "duration": 0.650624634915592,
+    "chord": "Ab:7",
+    "chord_index": 6
+  },
+  {
+    "pitch": 82,
+    "start_time": 72.613950563993,
+    "duration": 0.30646342178714353,
+    "chord": "Ab:7",
+    "chord_index": 6
+  },
+  {
+    "pitch": 85,
+    "start_time": 72.98561810941746,
+    "duration": 0.23685936481821598,
+    "chord": "Ab:7",
+    "chord_index": 6
+  },
+  {
+    "pitch": 84,
+    "start_time": 73.20068841031888,
+    "duration": 0.19918793607240967,
+    "chord": "Ab:7",
+    "chord_index": 6
+  },
+  {
+    "pitch": 77,
+    "start_time": 73.44576006511929,
+    "duration": 0.20584341731214578,
+    "chord": "Ab:7",
+    "chord_index": 6
+  },
+  {
+    "pitch": 82,
+    "start_time": 73.68999069972756,
+    "duration": 0.1373606212584976,
+    "chord": "Ab:7",
+    "chord_index": 6
+  },
+  {
+    "pitch": 75,
+    "start_time": 74.50161690833333,
+    "duration": 0.4879684761866919,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 77,
+    "start_time": 75.09503849838946,
+    "duration": 0.3887416908012622,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 75,
+    "start_time": 75.62167207324866,
+    "duration": 0.26412303209245164,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 77,
+    "start_time": 76.09666862508348,
+    "duration": 0.1050596120848058,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 84,
+    "start_time": 76.29026896992448,
+    "duration": 0.15091376447278237,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 82,
+    "start_time": 76.48201926405754,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 80,
+    "start_time": 76.48201926405754,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 73,
+    "start_time": 77.00161290833333,
+    "duration": 0.4879684761866919,
+    "chord": "Bb:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 73,
+    "start_time": 78.20098578429368,
+    "duration": 0.243331437892377,
+    "chord": "Bb:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 85,
+    "start_time": 78.82156600102331,
+    "duration": 0.15048841616367525,
+    "chord": "Bb:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 85,
+    "start_time": 78.82156600102331,
+    "duration": 0.15048841616367525,
+    "chord": "Bb:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 87,
+    "start_time": 79.50160890833332,
+    "duration": 0.349607169049325,
+    "chord": "Ab:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 89,
+    "start_time": 79.50160890833332,
+    "duration": 0.349607169049325,
+    "chord": "Ab:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 89,
+    "start_time": 80.03933611918119,
+    "duration": 0.21643688420796545,
+    "chord": "Ab:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 82,
+    "start_time": 80.25025784410289,
+    "duration": 0.15561684902620423,
+    "chord": "Ab:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 89,
+    "start_time": 80.77480917128136,
+    "duration": 0.1,
+    "chord": "Ab:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 65,
+    "start_time": 80.77480917128136,
+    "duration": 0.1,
+    "chord": "Ab:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 72,
+    "start_time": 80.96048111764196,
+    "duration": 0.1,
+    "chord": "Ab:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 72,
+    "start_time": 81.16827290833334,
+    "duration": 0.32279688129663414,
+    "chord": "F#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 75,
+    "start_time": 81.91469134252313,
+    "duration": 0.156989914327502,
+    "chord": "F#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 56,
+    "start_time": 82.21143398252347,
+    "duration": 0.11101074760594945,
+    "chord": "F#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 68,
+    "start_time": 82.21143398252347,
+    "duration": 0.11101074760594945,
+    "chord": "F#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 58,
+    "start_time": 82.38549237979558,
+    "duration": 0.1,
+    "chord": "F#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 56,
+    "start_time": 82.38549237979558,
+    "duration": 0.1,
+    "chord": "F#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 68,
+    "start_time": 82.83493690833333,
+    "duration": 0.32279688129663414,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 63,
+    "start_time": 83.22038726075152,
+    "duration": 0.2176373446682688,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 66,
+    "start_time": 83.56598839561751,
+    "duration": 0.13263943182319382,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 70,
+    "start_time": 83.81403809238819,
+    "duration": 0.13937645953708863,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 68,
+    "start_time": 83.9694631141062,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 63,
+    "start_time": 83.9694631141062,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 65,
+    "start_time": 84.24938003552464,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 73,
+    "start_time": 84.24938003552464,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 68,
+    "start_time": 84.50160090833333,
+    "duration": 0.32279688129663414,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 73,
+    "start_time": 84.88705126075152,
+    "duration": 0.2176373446682688,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 68,
+    "start_time": 85.1429530125089,
+    "duration": 0.19221743237143724,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 65,
+    "start_time": 85.45895338571836,
+    "duration": 0.11249643446159344,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 77,
+    "start_time": 85.45895338571836,
+    "duration": 0.11249643446159344,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 73,
+    "start_time": 85.60604738022474,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 68,
+    "start_time": 85.76638560495046,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 70,
+    "start_time": 86.16826490833333,
+    "duration": 0.6455937625932711,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 65,
+    "start_time": 87.46782856150726,
+    "duration": 0.36310617146456337,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 75,
+    "start_time": 88.00818522705224,
+    "duration": 0.2287680224008566,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 73,
+    "start_time": 88.37493917210534,
+    "duration": 0.20855013440644796,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 70,
+    "start_time": 89.05041587422613,
+    "duration": 0.14563251579010525,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 80,
+    "start_time": 89.50159290833334,
+    "duration": 0.48419532194495124,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 77,
+    "start_time": 90.64524640842751,
+    "duration": 0.28012096765923455,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 77,
+    "start_time": 91.3676910981181,
+    "duration": 0.10811279564721381,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 73,
+    "start_time": 91.3676910981181,
+    "duration": 0.10811279564721381,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 73,
+    "start_time": 91.3676910981181,
+    "duration": 0.10811279564721381,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 75,
+    "start_time": 91.64108122203544,
+    "duration": 0.1,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 84,
+    "start_time": 92.00158890833333,
+    "duration": 0.32279688129663414,
+    "chord": "F#:maj7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 80,
+    "start_time": 92.77296744297412,
+    "duration": 0.14357175679120399,
+    "chord": "F#:maj7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 80,
+    "start_time": 92.77296744297412,
+    "duration": 0.14357175679120399,
+    "chord": "F#:maj7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 63,
+    "start_time": 93.03289250181655,
+    "duration": 0.11659520068839181,
+    "chord": "F#:maj7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 75,
+    "start_time": 93.03289250181655,
+    "duration": 0.11659520068839181,
+    "chord": "F#:maj7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 97,
+    "start_time": 93.35380612770417,
+    "duration": 0.1,
+    "chord": "F#:maj7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 65,
+    "start_time": 93.66825290833333,
+    "duration": 0.32279688129663414,
+    "chord": "F:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 68,
+    "start_time": 94.25948508669593,
+    "duration": 0.18815723255383937,
+    "chord": "F:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 66,
+    "start_time": 94.56340734302475,
+    "duration": 0.12797086202916483,
+    "chord": "F:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 77,
+    "start_time": 94.56340734302475,
+    "duration": 0.12797086202916483,
+    "chord": "F:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 65,
+    "start_time": 94.712669254334,
+    "duration": 0.12076097776544074,
+    "chord": "F:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 68,
+    "start_time": 94.93112529232361,
+    "duration": 0.1,
+    "chord": "F:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 75,
+    "start_time": 94.93112529232361,
+    "duration": 0.1,
+    "chord": "F:min",
+    "chord_index": 9
+  },
+  {
+    "pitch": 75,
+    "start_time": 95.33491690833333,
+    "duration": 0.3189596397466654,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 77,
+    "start_time": 95.6435391820648,
+    "duration": 0.2670544831732507,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 75,
+    "start_time": 96.05308219005826,
+    "duration": 0.1860268541994688,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 73,
+    "start_time": 96.43688328459433,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 73,
+    "start_time": 96.43688328459433,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 77,
+    "start_time": 96.7143949637623,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 73,
+    "start_time": 96.7143949637623,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 70,
+    "start_time": 97.00158090833332,
+    "duration": 0.6379192794933336,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 68,
+    "start_time": 98.51460067186979,
+    "duration": 0.28389989609170035,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 68,
+    "start_time": 98.96591241225865,
+    "duration": 0.18942793945914557,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 65,
+    "start_time": 99.34482290384534,
+    "duration": 0.13888602585399187,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 63,
+    "start_time": 99.80548838617281,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 65,
+    "start_time": 99.80548838617281,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 80,
+    "start_time": 100.33490890833333,
+    "duration": 0.3189596397466654,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 72,
+    "start_time": 101.04636490329507,
+    "duration": 0.19917687197792497,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 73,
+    "start_time": 101.450428415391,
+    "duration": 0.10078398879024378,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 75,
+    "start_time": 101.450428415391,
+    "duration": 0.10078398879024378,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 80,
+    "start_time": 101.57875571883443,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 75,
+    "start_time": 102.00157290833333,
+    "duration": 0.4784394596199981,
+    "chord": "Ab:7",
+    "chord_index": 6
+  },
+  {
+    "pitch": 78,
+    "start_time": 102.46450631893053,
+    "duration": 0.4005817247598761,
+    "chord": "Ab:7",
+    "chord_index": 6
+  },
+  {
+    "pitch": 77,
+    "start_time": 102.97589986732152,
+    "duration": 0.2962251855881805,
+    "chord": "Ab:7",
+    "chord_index": 6
+  },
+  {
+    "pitch": 75,
+    "start_time": 103.55401929316666,
+    "duration": 0.1888576480974552,
+    "chord": "Ab:7",
+    "chord_index": 6
+  },
+  {
+    "pitch": 73,
+    "start_time": 103.7338742328687,
+    "duration": 0.15396997843046462,
+    "chord": "Ab:7",
+    "chord_index": 6
+  },
+  {
+    "pitch": 77,
+    "start_time": 104.0509290105572,
+    "duration": 0.10349665972758812,
+    "chord": "Ab:7",
+    "chord_index": 6
+  },
+  {
+    "pitch": 80,
+    "start_time": 104.50156890833333,
+    "duration": 0.3189596397466654,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 80,
+    "start_time": 104.99565625096848,
+    "duration": 0.20501235604679552,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 83,
+    "start_time": 105.36511440475776,
+    "duration": 0.15239508032813642,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 92,
+    "start_time": 105.36511440475776,
+    "duration": 0.15239508032813642,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 89,
+    "start_time": 105.56267651498653,
+    "duration": 0.12431976672875861,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 68,
+    "start_time": 106.16823290833332,
+    "duration": 0.6379192794933336,
+    "chord": "F#:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 72,
+    "start_time": 106.83647883355405,
+    "duration": 0.4561917138602746,
+    "chord": "F#:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 73,
+    "start_time": 107.93861478475812,
+    "duration": 0.24311468843197886,
+    "chord": "F#:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 77,
+    "start_time": 108.29019738516858,
+    "duration": 0.2406102046067721,
+    "chord": "F#:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 75,
+    "start_time": 108.69582859625486,
+    "duration": 0.15391168704378644,
+    "chord": "F#:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 73,
+    "start_time": 109.50156090833333,
+    "duration": 0.6379192794933308,
+    "chord": "C#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 75,
+    "start_time": 110.69090263665106,
+    "duration": 0.40634711139512,
+    "chord": "C#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 61,
+    "start_time": 111.55119417171196,
+    "duration": 0.20788743736675347,
+    "chord": "C#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 73,
+    "start_time": 111.55119417171196,
+    "duration": 0.20788743736675347,
+    "chord": "C#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 68,
+    "start_time": 112.13265850552895,
+    "duration": 0.1420590988769529,
+    "chord": "C#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 73,
+    "start_time": 112.34407484886982,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 77,
+    "start_time": 112.83488890833333,
+    "duration": 0.32117757470059344,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 77,
+    "start_time": 113.60014118804504,
+    "duration": 0.14407321110713459,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 75,
+    "start_time": 113.75439259618523,
+    "duration": 0.11719616625910978,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 77,
+    "start_time": 114.04282114660003,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 73,
+    "start_time": 114.04282114660003,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 75,
+    "start_time": 114.19105612119343,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 73,
+    "start_time": 114.50155290833332,
+    "duration": 0.48176636205089285,
+    "chord": "Ab:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 65,
+    "start_time": 115.75320910689786,
+    "duration": 0.1534419100623435,
+    "chord": "Ab:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 68,
+    "start_time": 116.02447060334447,
+    "duration": 0.1,
+    "chord": "Ab:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 70,
+    "start_time": 116.26586291898039,
+    "duration": 0.10644088893675827,
+    "chord": "Ab:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 73,
+    "start_time": 116.26586291898039,
+    "duration": 0.10644088893675827,
+    "chord": "Ab:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 77,
+    "start_time": 116.37524441968992,
+    "duration": 0.11474271572493064,
+    "chord": "Ab:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 75,
+    "start_time": 116.37524441968992,
+    "duration": 0.11474271572493064,
+    "chord": "Ab:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 78,
+    "start_time": 117.00154890833333,
+    "duration": 0.48176636205089013,
+    "chord": "F:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 77,
+    "start_time": 117.46497673866787,
+    "duration": 0.4015725386352533,
+    "chord": "F:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 75,
+    "start_time": 118.08432790958872,
+    "duration": 0.23498341096651515,
+    "chord": "F:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 73,
+    "start_time": 118.57397444010547,
+    "duration": 0.11518353057593841,
+    "chord": "F:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 78,
+    "start_time": 118.57397444010547,
+    "duration": 0.11518353057593841,
+    "chord": "F:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 80,
+    "start_time": 118.98400344869367,
+    "duration": 0.11668815699494611,
+    "chord": "F:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 75,
+    "start_time": 118.98400344869367,
+    "duration": 0.11668815699494611,
+    "chord": "F:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 72,
+    "start_time": 119.50154490833333,
+    "duration": 0.6423551494011869,
+    "chord": "Bb:min",
+    "chord_index": 6
+  },
+  {
+    "pitch": 75,
+    "start_time": 120.95713250960591,
+    "duration": 0.3753217016668314,
+    "chord": "Bb:min",
+    "chord_index": 6
+  },
+  {
+    "pitch": 75,
+    "start_time": 121.66087070882847,
+    "duration": 0.19343654408866134,
+    "chord": "Bb:min",
+    "chord_index": 6
+  },
+  {
+    "pitch": 73,
+    "start_time": 122.02748219900849,
+    "duration": 0.10462291292697182,
+    "chord": "Bb:min",
+    "chord_index": 6
+  },
+  {
+    "pitch": 72,
+    "start_time": 122.02748219900849,
+    "duration": 0.10462291292697182,
+    "chord": "Bb:min",
+    "chord_index": 6
+  },
+  {
+    "pitch": 68,
+    "start_time": 122.3919471306825,
+    "duration": 0.1,
+    "chord": "Bb:min",
+    "chord_index": 6
+  },
+  {
+    "pitch": 85,
+    "start_time": 122.83487290833332,
+    "duration": 0.48176636205089285,
+    "chord": "Bb:min7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 85,
+    "start_time": 123.79755045616248,
+    "duration": 0.24786294826680522,
+    "chord": "Bb:min7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 84,
+    "start_time": 124.13864762292293,
+    "duration": 0.17893591205585074,
+    "chord": "Bb:min7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 84,
+    "start_time": 124.62126796915547,
+    "duration": 0.10577856597770027,
+    "chord": "Bb:min7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 86,
+    "start_time": 124.62126796915547,
+    "duration": 0.10577856597770027,
+    "chord": "Bb:min7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 73,
+    "start_time": 125.33486890833333,
+    "duration": 0.48176636205089013,
+    "chord": "G:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 85,
+    "start_time": 126.45670520619633,
+    "duration": 0.22385185158330165,
+    "chord": "G:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 73,
+    "start_time": 126.64563642865947,
+    "duration": 0.17674566838216751,
+    "chord": "G:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 75,
+    "start_time": 126.82016689396289,
+    "duration": 0.15822981313133214,
+    "chord": "G:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 77,
+    "start_time": 127.09182297252659,
+    "duration": 0.1,
+    "chord": "G:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 82,
+    "start_time": 127.3084484057925,
+    "duration": 0.1,
+    "chord": "G:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 58,
+    "start_time": 127.83486490833333,
+    "duration": 0.48176636205089013,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 65,
+    "start_time": 128.46425795571568,
+    "duration": 0.37237849110513865,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 65,
+    "start_time": 129.1462798830774,
+    "duration": 0.20889118418759073,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 61,
+    "start_time": 129.4298403312602,
+    "duration": 0.10524860041587783,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 80,
+    "start_time": 129.4298403312602,
+    "duration": 0.10524860041587783,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 65,
+    "start_time": 129.66004174373344,
+    "duration": 0.11193308765079063,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 73,
+    "start_time": 130.33486090833333,
+    "duration": 0.49573386864209373,
+    "chord": "Ab:7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 77,
+    "start_time": 131.57605323022653,
+    "duration": 0.23810652171769833,
+    "chord": "Ab:7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 75,
+    "start_time": 131.79804441404156,
+    "duration": 0.19004787644344645,
+    "chord": "Ab:7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 77,
+    "start_time": 132.2396662925036,
+    "duration": 0.1214415705428648,
+    "chord": "Ab:7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 75,
+    "start_time": 132.2396662925036,
+    "duration": 0.1214415705428648,
+    "chord": "Ab:7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 75,
+    "start_time": 132.83485690833334,
+    "duration": 0.9914677372841819,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 77,
+    "start_time": 135.31380460478954,
+    "duration": 0.40386306696331437,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 58,
+    "start_time": 136.32243889933733,
+    "duration": 0.32353248835962956,
+    "chord": "C#:maj",
+    "chord_index": 4
+  },
+  {
+    "pitch": 84,
+    "start_time": 137.83923602668682,
+    "duration": 0.3307057592871183,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 85,
+    "start_time": 137.83923602668682,
+    "duration": 0.3307057592871183,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 84,
+    "start_time": 138.31800512430027,
+    "duration": 0.24699879405891856,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 82,
+    "start_time": 138.6376343218186,
+    "duration": 0.12302689438164215,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 80,
+    "start_time": 138.91513532183816,
+    "duration": 0.11067990240257969,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 77,
+    "start_time": 138.91513532183816,
+    "duration": 0.11067990240257969,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 80,
+    "start_time": 139.07790715064576,
+    "duration": 0.10155219479250892,
+    "chord": "F#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 75,
+    "start_time": 139.50151290833332,
+    "duration": 0.6609784915227879,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 65,
+    "start_time": 141.01338866188482,
+    "duration": 0.2695479649920459,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 77,
+    "start_time": 141.59992285933353,
+    "duration": 0.23216997689354382,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 56,
+    "start_time": 141.8390547221036,
+    "duration": 0.18283283266091316,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 84,
+    "start_time": 142.8392280266868,
+    "duration": 0.3307057592871183,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 47,
+    "start_time": 142.8392280266868,
+    "duration": 0.3307057592871183,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 94,
+    "start_time": 143.46953861160162,
+    "duration": 0.21772963237893544,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 92,
+    "start_time": 143.74533685865595,
+    "duration": 0.15910079081836315,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 80,
+    "start_time": 143.74533685865595,
+    "duration": 0.15910079081836315,
+    "chord": "Ab:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 78,
+    "start_time": 144.50150490833332,
+    "duration": 0.5346321328613184,
+    "chord": "Bb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 87,
+    "start_time": 144.50150490833332,
+    "duration": 0.5346321328613184,
+    "chord": "Bb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 85,
+    "start_time": 145.6582407129543,
+    "duration": 0.2454390175066004,
+    "chord": "Bb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 83,
+    "start_time": 146.0117366690712,
+    "duration": 0.15701704681509795,
+    "chord": "Bb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 87,
+    "start_time": 146.26940028163864,
+    "duration": 0.18478315560561492,
+    "chord": "Bb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 90,
+    "start_time": 146.43211593315843,
+    "duration": 0.13758596370810325,
+    "chord": "Bb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 79,
+    "start_time": 147.00150090833333,
+    "duration": 0.6609784915227879,
+    "chord": "C#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 79,
+    "start_time": 148.02685899768355,
+    "duration": 0.3682156721216434,
+    "chord": "C#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 75,
+    "start_time": 148.46792779559757,
+    "duration": 0.2786104393658633,
+    "chord": "C#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 71,
+    "start_time": 148.9441741058221,
+    "duration": 0.2241179486435648,
+    "chord": "C#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 75,
+    "start_time": 149.38345407186748,
+    "duration": 0.19704143965446916,
+    "chord": "C#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 68,
+    "start_time": 150.33482890833332,
+    "duration": 0.47815544394207193,
+    "chord": "G:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 85,
+    "start_time": 150.92318016288837,
+    "duration": 0.3246504461894644,
+    "chord": "G:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 70,
+    "start_time": 151.65006170347837,
+    "duration": 0.16297888011109896,
+    "chord": "G:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 82,
+    "start_time": 151.82583298648908,
+    "duration": 0.12182950107210924,
+    "chord": "G:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 82,
+    "start_time": 152.1649393612993,
+    "duration": 0.12288063661412943,
+    "chord": "G:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 80,
+    "start_time": 152.1649393612993,
+    "duration": 0.12288063661412943,
+    "chord": "G:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 73,
+    "start_time": 152.3734824176655,
+    "duration": 0.10188580021378439,
+    "chord": "G:min7",
+    "chord_index": 3
+  },
+  {
+    "pitch": 70,
+    "start_time": 152.83482490833333,
+    "duration": 0.6375405919227589,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 73,
+    "start_time": 153.4630652534006,
+    "duration": 0.514860024808406,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 70,
+    "start_time": 154.29810984111646,
+    "duration": 0.3316786297096009,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 77,
+    "start_time": 154.76947135983517,
+    "duration": 0.20168398833739726,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 70,
+    "start_time": 155.1129169458423,
+    "duration": 0.18057057924097747,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 73,
+    "start_time": 155.43573379466298,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 68,
+    "start_time": 156.16815290833333,
+    "duration": 0.31877029596137946,
+    "chord": "Ab:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 70,
+    "start_time": 156.56038707803668,
+    "duration": 0.21643363079297506,
+    "chord": "Ab:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 72,
+    "start_time": 157.08577497990134,
+    "duration": 0.13292129925382115,
+    "chord": "Ab:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 75,
+    "start_time": 157.34310262149194,
+    "duration": 0.10601546029619364,
+    "chord": "Ab:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 73,
+    "start_time": 157.34310262149194,
+    "duration": 0.10601546029619364,
+    "chord": "Ab:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 73,
+    "start_time": 157.34310262149194,
+    "duration": 0.10601546029619364,
+    "chord": "Ab:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 77,
+    "start_time": 157.83481690833332,
+    "duration": 0.31877029596137946,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 70,
+    "start_time": 158.82052048832608,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 70,
+    "start_time": 158.82052048832608,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 73,
+    "start_time": 159.05235923777153,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 75,
+    "start_time": 159.05235923777153,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 77,
+    "start_time": 159.50148090833332,
+    "duration": 0.47815544394207193,
+    "chord": "Bb:min",
+    "chord_index": 7
+  },
+  {
+    "pitch": 82,
+    "start_time": 160.60155647927573,
+    "duration": 0.22373625601029487,
+    "chord": "Bb:min",
+    "chord_index": 7
+  },
+  {
+    "pitch": 84,
+    "start_time": 160.8857013500655,
+    "duration": 0.17785414536336136,
+    "chord": "Bb:min",
+    "chord_index": 7
+  },
+  {
+    "pitch": 85,
+    "start_time": 161.04138679399398,
+    "duration": 0.1,
+    "chord": "Bb:min",
+    "chord_index": 7
+  },
+  {
+    "pitch": 85,
+    "start_time": 161.28815827120258,
+    "duration": 0.13870194248063172,
+    "chord": "Bb:min",
+    "chord_index": 7
+  },
+  {
+    "pitch": 82,
+    "start_time": 161.28815827120258,
+    "duration": 0.13870194248063172,
+    "chord": "Bb:min",
+    "chord_index": 7
+  },
+  {
+    "pitch": 80,
+    "start_time": 161.5083389668293,
+    "duration": 0.1,
+    "chord": "Bb:min",
+    "chord_index": 7
+  },
+  {
+    "pitch": 72,
+    "start_time": 162.00147690833333,
+    "duration": 0.31877029596137946,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 75,
+    "start_time": 162.31085615984227,
+    "duration": 0.25258157967352823,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 73,
+    "start_time": 162.7398334795225,
+    "duration": 0.18884008959060877,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 77,
+    "start_time": 162.98461295613308,
+    "duration": 0.11084675491803879,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 75,
+    "start_time": 162.98461295613308,
+    "duration": 0.11084675491803879,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 72,
+    "start_time": 162.98461295613308,
+    "duration": 0.11084675491803879,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 75,
+    "start_time": 163.2456308809457,
+    "duration": 0.1,
+    "chord": "Ab:maj",
+    "chord_index": 8
+  },
+  {
+    "pitch": 63,
+    "start_time": 163.66814090833333,
+    "duration": 0.31877029596137946,
+    "chord": "F#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 75,
+    "start_time": 164.02350621213105,
+    "duration": 0.24472135389649827,
+    "chord": "F#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 60,
+    "start_time": 164.38778055825833,
+    "duration": 0.16506120229750845,
+    "chord": "F#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 65,
+    "start_time": 164.71100366175367,
+    "duration": 0.10670935425388796,
+    "chord": "F#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 58,
+    "start_time": 164.98213200825964,
+    "duration": 0.10000000000000002,
+    "chord": "F#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 70,
+    "start_time": 164.98213200825964,
+    "duration": 0.10000000000000002,
+    "chord": "F#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 73,
+    "start_time": 164.98213200825964,
+    "duration": 0.10000000000000002,
+    "chord": "F#:maj",
+    "chord_index": 9
+  },
+  {
+    "pitch": 73,
+    "start_time": 165.33480490833333,
+    "duration": 0.4583970573531408,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 89,
+    "start_time": 166.41616852505734,
+    "duration": 0.20291381645590148,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 89,
+    "start_time": 166.65508322858574,
+    "duration": 0.1727584220495231,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 85,
+    "start_time": 167.1886728406251,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 89,
+    "start_time": 167.35950350253538,
+    "duration": 0.10128244384919148,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 85,
+    "start_time": 167.83480090833334,
+    "duration": 0.3055980382354255,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 89,
+    "start_time": 168.62376767758957,
+    "duration": 0.1454328281319735,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 82,
+    "start_time": 168.62376767758957,
+    "duration": 0.1454328281319735,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 94,
+    "start_time": 168.91998040831044,
+    "duration": 0.11748959448879938,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 77,
+    "start_time": 169.50146490833333,
+    "duration": 0.611196076470851,
+    "chord": "C#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 82,
+    "start_time": 170.8649855344539,
+    "duration": 0.28870034716010046,
+    "chord": "C#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 85,
+    "start_time": 171.32488946932176,
+    "duration": 0.2491863555278774,
+    "chord": "C#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 75,
+    "start_time": 171.68370766466668,
+    "duration": 0.19209641030091015,
+    "chord": "C#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 84,
+    "start_time": 171.98914084665253,
+    "duration": 0.2121196770238873,
+    "chord": "C#:maj",
+    "chord_index": 5
+  },
+  {
+    "pitch": 84,
+    "start_time": 172.83479290833333,
+    "duration": 0.3055980382354255,
+    "chord": "Ab:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 84,
+    "start_time": 173.42357027332858,
+    "duration": 0.18235566099005907,
+    "chord": "Ab:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 75,
+    "start_time": 173.63275154540756,
+    "duration": 0.15637978725862478,
+    "chord": "Ab:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 77,
+    "start_time": 173.8394861004038,
+    "duration": 0.11505491007447224,
+    "chord": "Ab:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 77,
+    "start_time": 173.8394861004038,
+    "duration": 0.11505491007447224,
+    "chord": "Ab:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 78,
+    "start_time": 174.0194156451335,
+    "duration": 0.1,
+    "chord": "Ab:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 79,
+    "start_time": 174.17596917965366,
+    "duration": 0.1,
+    "chord": "Ab:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 68,
+    "start_time": 174.50145690833332,
+    "duration": 0.3055980382354255,
+    "chord": "F#:maj7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 61,
+    "start_time": 174.8444017167845,
+    "duration": 0.22528917803943121,
+    "chord": "F#:maj7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 63,
+    "start_time": 175.2376655799141,
+    "duration": 0.1335984317703245,
+    "chord": "F#:maj7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 65,
+    "start_time": 175.52910728931286,
+    "duration": 0.10534851760151973,
+    "chord": "F#:maj7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 68,
+    "start_time": 175.52910728931286,
+    "duration": 0.10534851760151973,
+    "chord": "F#:maj7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 68,
+    "start_time": 175.67709793492415,
+    "duration": 0.1,
+    "chord": "F#:maj7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 68,
+    "start_time": 175.67709793492415,
+    "duration": 0.1,
+    "chord": "F#:maj7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 85,
+    "start_time": 176.16812090833332,
+    "duration": 0.3055980382354255,
+    "chord": "F:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 89,
+    "start_time": 176.93681902638724,
+    "duration": 0.15100469866347288,
+    "chord": "F:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 89,
+    "start_time": 177.25348597714094,
+    "duration": 0.12094492609724383,
+    "chord": "F:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 92,
+    "start_time": 177.25348597714094,
+    "duration": 0.12094492609724383,
+    "chord": "F:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 94,
+    "start_time": 177.49598410617972,
+    "duration": 0.1,
+    "chord": "F:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 68,
+    "start_time": 177.83478490833332,
+    "duration": 0.4583970573531408,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 73,
+    "start_time": 178.34920212101008,
+    "duration": 0.33793376705914874,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 75,
+    "start_time": 178.75539520431545,
+    "duration": 0.28829498655367014,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 68,
+    "start_time": 179.22411837732508,
+    "duration": 0.1494791388477987,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 68,
+    "start_time": 179.76606052388433,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 70,
+    "start_time": 179.76606052388433,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 75,
+    "start_time": 180.33478090833333,
+    "duration": 0.48231185543650584,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 73,
+    "start_time": 180.77541715106526,
+    "duration": 0.4151058260840194,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 78,
+    "start_time": 181.49134870263066,
+    "duration": 0.23033410710132216,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 80,
+    "start_time": 181.687050182344,
+    "duration": 0.22865106089025827,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 78,
+    "start_time": 181.93095378665785,
+    "duration": 0.17541915050867268,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 77,
+    "start_time": 181.93095378665785,
+    "duration": 0.17541915050867268,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 75,
+    "start_time": 182.34252677659276,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 73,
+    "start_time": 182.83477690833334,
+    "duration": 0.48231185543650035,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 71,
+    "start_time": 183.71116673812105,
+    "duration": 0.3007783771174528,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 73,
+    "start_time": 184.31574432542564,
+    "duration": 0.1994433415666208,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 73,
+    "start_time": 184.76656542103197,
+    "duration": 0.1,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 80,
+    "start_time": 185.33477290833332,
+    "duration": 0.4786275287630311,
+    "chord": "Ab:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 77,
+    "start_time": 186.3721083431911,
+    "duration": 0.3054557904001924,
+    "chord": "Ab:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 80,
+    "start_time": 186.86974322044685,
+    "duration": 0.1946579574365962,
+    "chord": "Ab:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 77,
+    "start_time": 187.04004718199624,
+    "duration": 0.13717492683547852,
+    "chord": "Ab:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 75,
+    "start_time": 187.81567171666666,
+    "duration": 0.29173168478138733,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 77,
+    "start_time": 188.08219544404133,
+    "duration": 0.2510813711938763,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 80,
+    "start_time": 188.46006367712812,
+    "duration": 0.1721832132866378,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 82,
+    "start_time": 188.69981339522468,
+    "duration": 0.10177661287360133,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 75,
+    "start_time": 188.69981339522468,
+    "duration": 0.10177661287360133,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 77,
+    "start_time": 188.9769352430479,
+    "duration": 0.10000000000000002,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 80,
+    "start_time": 188.9769352430479,
+    "duration": 0.10000000000000002,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 73,
+    "start_time": 188.9769352430479,
+    "duration": 0.10000000000000002,
+    "chord": "C#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 55,
+    "start_time": 189.327822075,
+    "duration": 0.32991470667010775,
+    "chord": "F#:maj7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 80,
+    "start_time": 189.9893963923803,
+    "duration": 0.23472226129081292,
+    "chord": "F#:maj7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 73,
+    "start_time": 190.23020685921858,
+    "duration": 0.13376955070146296,
+    "chord": "F#:maj7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 51,
+    "start_time": 190.46687115314424,
+    "duration": 0.1160913954507701,
+    "chord": "F#:maj7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 72,
+    "start_time": 190.46687115314424,
+    "duration": 0.1160913954507701,
+    "chord": "F#:maj7",
+    "chord_index": 7
+  },
+  {
+    "pitch": 68,
+    "start_time": 191.03788878333333,
+    "duration": 0.5097768360933024,
+    "chord": "F:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 65,
+    "start_time": 192.25418392244796,
+    "duration": 0.21086333367670723,
+    "chord": "F:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 65,
+    "start_time": 192.5886829871781,
+    "duration": 0.13556950538956342,
+    "chord": "F:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 63,
+    "start_time": 192.5886829871781,
+    "duration": 0.13556950538956342,
+    "chord": "F:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 65,
+    "start_time": 192.97583935560013,
+    "duration": 0.11034123020008696,
+    "chord": "F:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 68,
+    "start_time": 192.97583935560013,
+    "duration": 0.11034123020008696,
+    "chord": "F:min",
+    "chord_index": 8
+  },
+  {
+    "pitch": 85,
+    "start_time": 193.68024566666665,
+    "duration": 0.33426891092057737,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 84,
+    "start_time": 194.48105007214363,
+    "duration": 0.17360471258768606,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 80,
+    "start_time": 194.48105007214363,
+    "duration": 0.17360471258768606,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 92,
+    "start_time": 194.77042182864523,
+    "duration": 0.13921493094949317,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 77,
+    "start_time": 194.77042182864523,
+    "duration": 0.13921493094949317,
+    "chord": "Eb:min7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 77,
+    "start_time": 195.41288178333332,
+    "duration": 0.4522485616487336,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 61,
+    "start_time": 196.5467238131118,
+    "duration": 0.1874990452295372,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 80,
+    "start_time": 196.84664967960452,
+    "duration": 0.13492772110014759,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 61,
+    "start_time": 196.84664967960452,
+    "duration": 0.13492772110014759,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 63,
+    "start_time": 197.04481821417653,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 77,
+    "start_time": 197.79482241666665,
+    "duration": 0.7113355656253448,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 78,
+    "start_time": 199.61193332353915,
+    "duration": 0.3147936882905744,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 73,
+    "start_time": 200.26360221691493,
+    "duration": 0.25232031513489395,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 73,
+    "start_time": 200.83855783824453,
+    "duration": 0.1779701105673599,
+    "chord": "Eb:min7",
+    "chord_index": 4
+  },
+  {
+    "pitch": 73,
+    "start_time": 201.5413442,
+    "duration": 0.3332531310691437,
+    "chord": "Ab:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 78,
+    "start_time": 202.48346659556336,
+    "duration": 0.12359958655326866,
+    "chord": "Ab:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 80,
+    "start_time": 202.48346659556336,
+    "duration": 0.12359958655326866,
+    "chord": "Ab:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 85,
+    "start_time": 202.72615304082984,
+    "duration": 0.12839244978014658,
+    "chord": "Ab:7",
+    "chord_index": 5
+  },
+  {
+    "pitch": 66,
+    "start_time": 203.29654972499998,
+    "duration": 0.6164029229468951,
+    "chord": "F#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 70,
+    "start_time": 204.21952719237882,
+    "duration": 0.42401841053809564,
+    "chord": "F#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 73,
+    "start_time": 204.83249254556256,
+    "duration": 0.2736278537134736,
+    "chord": "F#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 65,
+    "start_time": 205.08811638282992,
+    "duration": 0.1724659779157801,
+    "chord": "F#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 63,
+    "start_time": 205.30664476998058,
+    "duration": 0.2122365769638163,
+    "chord": "F#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 63,
+    "start_time": 205.81669037390432,
+    "duration": 0.16776277022101616,
+    "chord": "F#:maj",
+    "chord_index": 6
+  },
+  {
+    "pitch": 77,
+    "start_time": 206.54307230833334,
+    "duration": 0.2228280085091386,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 80,
+    "start_time": 206.97346506118058,
+    "duration": 0.12407588131417797,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 75,
+    "start_time": 207.14315364135447,
+    "duration": 0.1,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 73,
+    "start_time": 207.42395574455517,
+    "duration": 0.10000000000000002,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 72,
+    "start_time": 207.42395574455517,
+    "duration": 0.10000000000000002,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 75,
+    "start_time": 207.42395574455517,
+    "duration": 0.10000000000000002,
+    "chord": "C#:maj",
+    "chord_index": 7
+  },
+  {
+    "pitch": 73,
+    "start_time": 207.71668154166665,
+    "duration": 0.598932679676206,
+    "chord": "Eb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 66,
+    "start_time": 208.8594995783994,
+    "duration": 0.36120440388886005,
+    "chord": "Eb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 68,
+    "start_time": 209.6602297597073,
+    "duration": 0.18851364990897945,
+    "chord": "Eb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 69,
+    "start_time": 209.8400145182603,
+    "duration": 0.1727374307837045,
+    "chord": "Eb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 77,
+    "start_time": 210.14511591876547,
+    "duration": 0.11844137907756876,
+    "chord": "Eb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 82,
+    "start_time": 210.30510689214643,
+    "duration": 0.12378159558353805,
+    "chord": "Eb:min7",
+    "chord_index": 8
+  },
+  {
+    "pitch": 68,
+    "start_time": 210.87119038333333,
+    "duration": 0.5603662935880801,
+    "chord": "Ab:7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 65,
+    "start_time": 211.4459696235219,
+    "duration": 0.40247428717091543,
+    "chord": "Ab:7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 63,
+    "start_time": 212.1480109562459,
+    "duration": 0.310489880617949,
+    "chord": "Ab:7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 60,
+    "start_time": 212.72238466560327,
+    "duration": 0.14042467073090326,
+    "chord": "Ab:7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 63,
+    "start_time": 212.72238466560327,
+    "duration": 0.14042467073090326,
+    "chord": "Ab:7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 65,
+    "start_time": 213.23356593177067,
+    "duration": 0.10421088742467867,
+    "chord": "Ab:7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 66,
+    "start_time": 213.23356593177067,
+    "duration": 0.10421088742467867,
+    "chord": "Ab:7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 63,
+    "start_time": 213.3688022179138,
+    "duration": 0.1,
+    "chord": "Ab:7",
+    "chord_index": 9
+  },
+  {
+    "pitch": 75,
+    "start_time": 213.82257454999998,
+    "duration": 0.8783912171709771,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 65,
+    "start_time": 215.7331004089845,
+    "duration": 0.4219712937632686,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 68,
+    "start_time": 216.46682942865766,
+    "duration": 0.33869674479510603,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 68,
+    "start_time": 216.7987226734467,
+    "duration": 0.30699799789069354,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 75,
+    "start_time": 217.06388097819956,
+    "duration": 0.2657642407475278,
+    "chord": "C#:maj",
+    "chord_index": 3
+  },
+  {
+    "pitch": 77,
+    "start_time": 217.29486199562035,
+    "duration": 0.30484227847070394,
+    "chord": "C#:maj",
+    "chord_index": 3
+  }
+]

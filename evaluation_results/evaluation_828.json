@@ -1,0 +1,32 @@
+{
+  "song_id": "828",
+  "scores": {
+    "chord_alignment": 0.5088495575221239,
+    "timing_accuracy": 0.9952973160625413,
+    "note_density": 1.0,
+    "overall": 0.8347156245282218
+  },
+  "melody_stats": {
+    "num_notes": 452,
+    "duration": 255.519100822117,
+    "pitch_range": 66,
+    "avg_note_duration": 0.27772599085219435
+  },
+  "chord_progression": [
+    "A:min",
+    "D:min",
+    "A:min",
+    "E:min",
+    "A:min",
+    "D:min",
+    "E:min",
+    "A:min",
+    "E:min",
+    "A:min"
+  ],
+  "timing_info": {
+    "expected_duration": 256.7264039583334,
+    "generated_duration": 255.519100822117,
+    "coverage_ratio": 0.9952973160625413
+  }
+}

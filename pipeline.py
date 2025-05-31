@@ -10,6 +10,10 @@ from pathlib import Path
 import argparse
 import os
 import pretty_midi
+from evaluator import evaluate_melody, SimpleMelodyEvaluator  # ✅ Fixed import
+
+def evaluate_generated_melody(melody, chord_sequence, chord_times):
+    return evaluate_melody(melody, chord_sequence, chord_times)
 
 def main(args):
     print("Chord to Melody Generation - Attention-Based Global Context Approach")
@@ -24,8 +28,8 @@ def main(args):
         return
     
     # Choose device - always use CPU for generation due to MPS limitations
-    training_device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
-    generation_device = torch.device('cpu')
+    training_device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    generation_device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"Using device: {training_device} (training) / {generation_device} (generation)")
     
     # Load vocabularies & dataset
@@ -50,7 +54,7 @@ def main(args):
     print(f"Train samples: {len(train_dataset)}, Val samples: {len(val_dataset)}")
         
     # Create dataloaders
-    batch_size = 8 if training_device.type == 'mps' else 16  # Smaller batch for MPS
+    batch_size = 8 if training_device.type == 'cuda' else 16  # Smaller batch for MPS
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=0)
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=0)
         
@@ -98,19 +102,29 @@ def main(args):
             with open("processed_pop909_chord_melody/chord_melody_data.json", 'r') as f:
                 song_data = json.load(f)
             
-            if song_data:
-                test_song = song_data[300]  # Take first song
+            # ✅ Fixed: Only test a few songs instead of looping through all
+            test_indices = [i for i in range(len(song_data)-100, len(song_data))]
+            
+            for song_idx in test_indices:
+                if song_idx >= len(song_data):
+                    continue
+                    
+                test_song = song_data[song_idx]
                 real_chords = test_song['full_chord_sequence']
                 song_id = test_song['song_id']
+                
+                print(f"\n" + "="*50)
+                print(f"TESTING SONG {song_idx + 1}: {song_id}")
+                print(f"="*50)
                 
                 # Path to original MIDI file
                 original_midi_path = f"POP909-Dataset/POP909/{song_id}/{song_id}.mid"
                 
-                print(f"Using song: {song_id}")
                 print(f"Chord progression: {len(real_chords)} chords")
                 print(f"Chords: {' | '.join(real_chords[:8])}{'...' if len(real_chords) > 8 else ''}")
                 
                 # DEBUG: Check original MIDI properties
+                original_tempo = 120  # Default
                 try:
                     original_midi = pretty_midi.PrettyMIDI(original_midi_path)
                     original_duration = original_midi.get_end_time()
@@ -120,10 +134,6 @@ def main(args):
                     print(f"  Duration: {original_duration:.1f}s")
                     print(f"  Estimated tempo: {original_tempo:.1f} BPM")
                     print(f"  Instruments: {len(original_midi.instruments)}")
-                    
-                    for i, inst in enumerate(original_midi.instruments):
-                        inst_duration = max([n.end for n in inst.notes]) if inst.notes else 0
-                        print(f"    {i}: {inst.name} - {len(inst.notes)} notes, {inst_duration:.1f}s")
                         
                 except Exception as e:
                     print(f"Could not analyze original MIDI: {e}")
@@ -146,13 +156,6 @@ def main(args):
                     print(f"  Extracted {len(chord_times)} chord segments")
                     print(f"  Extracted duration: {extracted_duration:.1f}s")
                     print(f"  Average chord duration: {extracted_duration/len(chord_times):.1f}s")
-                    
-                    # Show first few chord timings
-                    print(f"  First few chords:")
-                    for i, (start, end, idx) in enumerate(chord_times[:5]):
-                        duration = end - start
-                        chord = real_chords[i] if i < len(real_chords) else "N/A"
-                        print(f"    {i+1}. {start:5.1f}s-{end:5.1f}s ({duration:4.1f}s) -> {chord}")
                 else:
                     print("  Failed to extract timing, using fallback")
                     chord_times = [(i * 2.0, (i + 1) * 2.0, i) for i in range(len(real_chords))]
@@ -160,17 +163,22 @@ def main(args):
                 # Generate melody with chord-aligned timing
                 print(f"\nGenerating chord-aligned melody...")
                 
-                # Move model to CPU for generation (avoid MPS issues)
-                model = model.to(generation_device)
-                
                 try:
-                    # Generate using the chord-aligned method
-                    generated_melody = model.generate_chord_aligned_melody(
-                        chord_sequence=real_chords,
-                        chord_times=[(start, end) for start, end, _ in chord_times],  # Remove index
-                        vocab_path=vocab_path,
-                        temperature=1.1
-                    )
+                    generated_melody_stored_path = f"generated_melody_stored/{song_id}.json"
+                    if os.path.exists(generated_melody_stored_path):
+                        with open(generated_melody_stored_path, 'r') as f:
+                            generated_melody = json.load(f)
+                    else:
+                        # Generate using the chord-aligned method
+                        generated_melody = model.generate_chord_aligned_melody(
+                            chord_sequence=real_chords,
+                            chord_times=[(start, end) for start, end, _ in chord_times],  # Remove index
+                            vocab_path=vocab_path,
+                            temperature=1.1
+                        )
+                        os.makedirs("generated_melody_stored", exist_ok=True)
+                        with open(generated_melody_stored_path, 'w') as f:
+                            json.dump(generated_melody, f, indent=2)
                     
                     if generated_melody:
                         print(f"✓ Generated {len(generated_melody)} notes")
@@ -183,6 +191,63 @@ def main(args):
                         print(f"  Expected duration: {expected_duration:.1f}s")
                         print(f"  Coverage ratio: {generated_duration/expected_duration:.2f}")
                         
+                        # ✅ FIXED: Comprehensive evaluation
+                        evaluation_scores = evaluate_generated_melody(
+                            generated_melody, 
+                            real_chords, 
+                            [(start, end, 0) for start, end, _ in chord_times]
+                        )
+                        
+                        # ✅ FIXED: Detailed chord-by-chord analysis
+                        evaluator = SimpleMelodyEvaluator()
+                        print(f"\n🔍 CHORD-BY-CHORD ANALYSIS:")
+                        for i, chord in enumerate(real_chords[:5]):  # Show first 5 chords
+                            if i >= len(chord_times):
+                                break
+                                
+                            chord_start, chord_end = chord_times[i][0], chord_times[i][1]
+                            
+                            # Find notes in this chord
+                            chord_notes = [n for n in generated_melody 
+                                          if chord_start <= n['start_time'] < chord_end]
+                            
+                            if chord_notes:
+                                # Evaluate just this chord
+                                chord_alignment = evaluator.chord_alignment_score(
+                                    chord_notes, [chord], [(chord_start, chord_end, 0)]
+                                )
+                                
+                                pitches = [n['pitch'] % 12 for n in chord_notes]
+                                print(f"  Chord {i+1} ({chord}): {chord_alignment:.3f} "
+                                      f"| Notes: {len(chord_notes)} | Pitches: {pitches}")
+                            else:
+                                print(f"  Chord {i+1} ({chord}): No notes generated")
+                        
+                        # ✅ FIXED: Save evaluation results
+                        evaluation_results = {
+                            'song_id': song_id,
+                            'scores': evaluation_scores,  # ✅ Now this variable exists
+                            'melody_stats': {
+                                'num_notes': len(generated_melody),
+                                'duration': max(n['start_time'] + n['duration'] for n in generated_melody),
+                                'pitch_range': max(n['pitch'] for n in generated_melody) - min(n['pitch'] for n in generated_melody),
+                                'avg_note_duration': sum(n['duration'] for n in generated_melody) / len(generated_melody)
+                            },
+                            'chord_progression': real_chords[:10],  # First 10 chords for reference
+                            'timing_info': {
+                                'expected_duration': expected_duration,
+                                'generated_duration': generated_duration,
+                                'coverage_ratio': generated_duration / expected_duration if expected_duration > 0 else 0
+                            }
+                        }
+                        
+                        # Save evaluation results
+                        os.makedirs("evaluation_results", exist_ok=True)
+                        with open(f'evaluation_results/evaluation_{song_id}.json', 'w') as f:
+                            json.dump(evaluation_results, f, indent=2)
+                        
+                        print(f"✅ Evaluation results saved to evaluation_results/evaluation_{song_id}.json")
+                        
                         # Save generated melody with original tracks
                         os.makedirs("generated_real_song_aligned", exist_ok=True)
                         output_path = f"generated_real_song_aligned/{song_id}.mid"
@@ -191,10 +256,10 @@ def main(args):
                             generate_midi_from_melody(
                                 generated_melody, 
                                 output_path,
-                                tempo=original_tempo if 'original_tempo' in locals() else 120,
+                                tempo=original_tempo,
                                 original_midi_path=original_midi_path
                             )
-                            print(f"✓ Saved to {output_path}")
+                            print(f"✓ Saved MIDI to {output_path}")
                             
                         except Exception as e:
                             print(f"  Error saving MIDI: {e}")
@@ -208,11 +273,12 @@ def main(args):
                             print(f"\nTiming Comparison:")
                             print(f"  Original MIDI:     {original_duration:.1f}s")
                             print(f"  Generated melody:  {generated_duration:.1f}s")
-                            print(f"  Timing accuracy:   {1 - abs(generated_duration - original_duration)/original_duration:.1%}")
+                            timing_accuracy = 1 - abs(generated_duration - original_duration)/original_duration
+                            print(f"  Timing accuracy:   {timing_accuracy:.1%}")
                             
-                            if abs(generated_duration - original_duration) / original_duration < 0.1:
+                            if timing_accuracy > 0.9:
                                 print(f"  ✅ Excellent timing alignment!")
-                            elif abs(generated_duration - original_duration) / original_duration < 0.2:
+                            elif timing_accuracy > 0.8:
                                 print(f"  ✓ Good timing alignment")
                             else:
                                 print(f"  ⚠️ Timing could be improved")
@@ -222,10 +288,8 @@ def main(args):
                         
                 except Exception as e:
                     print(f"  ❌ Generation failed: {e}")
-                    print(f"  This might be because the chord-aligned generation method isn't implemented yet")
-                    
-            else:
-                print("No song data found in processed files")
+                    import traceback
+                    traceback.print_exc()
                     
         except FileNotFoundError:
             print("Processed song data not found. Please run with --process_data flag first.")
@@ -233,7 +297,7 @@ def main(args):
             print(f"Error in real song test: {e}")
             import traceback
             traceback.print_exc()
-
+    
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Attention-Based Chord to Melody Generation")
     parser.add_argument("--train", action="store_true", help="Train the model")

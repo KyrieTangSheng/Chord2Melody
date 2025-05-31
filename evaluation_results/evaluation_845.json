@@ -1,0 +1,32 @@
+{
+  "song_id": "845",
+  "scores": {
+    "chord_alignment": 0.5697674418604651,
+    "timing_accuracy": 0.9988077075093994,
+    "note_density": 1.0,
+    "overall": 0.8561917164566215
+  },
+  "melody_stats": {
+    "num_notes": 602,
+    "duration": 363.9480494815437,
+    "pitch_range": 89,
+    "avg_note_duration": 0.33476324908376326
+  },
+  "chord_progression": [
+    "D:min",
+    "C:maj",
+    "Bb:maj7",
+    "D:min",
+    "C:maj",
+    "Bb:maj7",
+    "D:min",
+    "Bb:maj7",
+    "D:min",
+    "Bb:maj7"
+  ],
+  "timing_info": {
+    "expected_duration": 364.3825,
+    "generated_duration": 363.9480494815437,
+    "coverage_ratio": 0.9988077075093994
+  }
+}

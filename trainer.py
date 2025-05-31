@@ -5,7 +5,7 @@ import torch
 import time
 
 class ChordToMelodyTrainer:
-    def __init__(self, model, train_loader, val_loader, device='mps'):
+    def __init__(self, model, train_loader, val_loader, device='cuda'):
         self.model = model.to(device)
         self.train_loader = train_loader
         self.val_loader = val_loader

@@ -1,0 +1,32 @@
+{
+  "song_id": "873",
+  "scores": {
+    "chord_alignment": 0.5069767441860465,
+    "timing_accuracy": 0.9970774193382359,
+    "note_density": 0.7254778352621143,
+    "overall": 0.743177332928799
+  },
+  "melody_stats": {
+    "num_notes": 645,
+    "duration": 228.43449988580056,
+    "pitch_range": 41,
+    "avg_note_duration": 0.19221353380586456
+  },
+  "chord_progression": [
+    "A:min7",
+    "A:min",
+    "F:maj",
+    "F:maj",
+    "G:maj",
+    "C:maj",
+    "A:min7",
+    "G:maj",
+    "F:maj",
+    "D:7"
+  ],
+  "timing_info": {
+    "expected_duration": 229.104075025,
+    "generated_duration": 228.43449988580056,
+    "coverage_ratio": 0.9970774193382359
+  }
+}

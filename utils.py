@@ -410,3 +410,6 @@ def align_melody_to_chord_timing(melody: List[Dict], chord_times: List[tuple]) -
     
     return aligned_melody
 
+
+
+

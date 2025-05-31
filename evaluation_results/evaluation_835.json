@@ -1,0 +1,32 @@
+{
+  "song_id": "835",
+  "scores": {
+    "chord_alignment": 0.4668141592920354,
+    "timing_accuracy": 0.9983195341919555,
+    "note_density": 0.9759328840045768,
+    "overall": 0.8136888591628559
+  },
+  "melody_stats": {
+    "num_notes": 452,
+    "duration": 218.1255216532148,
+    "pitch_range": 41,
+    "avg_note_duration": 0.2401601145339456
+  },
+  "chord_progression": [
+    "Ab:maj",
+    "Ab:7",
+    "C#:maj",
+    "Bb:maj",
+    "Ab:maj",
+    "Ab:maj",
+    "Ab:maj",
+    "C#:maj",
+    "C#:maj",
+    "Bb:7"
+  ],
+  "timing_info": {
+    "expected_duration": 218.49269115,
+    "generated_duration": 218.1255216532148,
+    "coverage_ratio": 0.9983195341919555
+  }
+}

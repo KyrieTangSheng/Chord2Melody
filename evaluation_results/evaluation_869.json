@@ -1,0 +1,32 @@
+{
+  "song_id": "869",
+  "scores": {
+    "chord_alignment": 0.42370744010088274,
+    "timing_accuracy": 0.9981073125151853,
+    "note_density": 0.6756695830272623,
+    "overall": 0.6991614452144436
+  },
+  "melody_stats": {
+    "num_notes": 793,
+    "duration": 266.73472374164595,
+    "pitch_range": 96,
+    "avg_note_duration": 0.1927065387932015
+  },
+  "chord_progression": [
+    "C:min",
+    "Bb:maj",
+    "Ab:maj",
+    "F:min7",
+    "Bb:maj",
+    "Eb:maj",
+    "Eb:maj",
+    "Ab:maj",
+    "C:min",
+    "C:min"
+  ],
+  "timing_info": {
+    "expected_duration": 267.24052654166667,
+    "generated_duration": 266.73472374164595,
+    "coverage_ratio": 0.9981073125151853
+  }
+}
