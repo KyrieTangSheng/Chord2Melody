@@ -11,12 +11,10 @@ class ChordToMelodyTrainer:
         self.val_loader = val_loader
         self.device = device
         
-        # Simple loss functions
-        self.pitch_criterion = nn.CrossEntropyLoss(ignore_index=0)  # Ignore padding
+        self.pitch_criterion = nn.CrossEntropyLoss(ignore_index=0)
         self.duration_criterion = nn.MSELoss()
         self.start_criterion = nn.MSELoss()
         
-        # Simple optimizer setup
         self.optimizer = optim.Adam(self.model.parameters(), lr=1e-4, weight_decay=1e-5)
         self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(
             self.optimizer, 
@@ -30,7 +28,6 @@ class ChordToMelodyTrainer:
         self.best_val_loss = float('inf')
         
     def calculate_accuracy(self, pitch_logits, target_pitch, mask):
-        """Calculate pitch prediction accuracy for non-padded positions"""
         with torch.no_grad():
             pred_pitch = torch.argmax(pitch_logits, dim=-1)
             target_flat = target_pitch.reshape(-1)
@@ -50,9 +47,8 @@ class ChordToMelodyTrainer:
         num_batches = 0
         
         for batch_idx, batch in enumerate(self.train_loader):
-            # Move batch to device - updated for new dataset structure
             full_chord_sequence = batch['full_chord_sequence'].to(self.device)
-            chord_durations = batch['chord_durations'].to(self.device)  # NEW
+            chord_durations = batch['chord_durations'].to(self.device)
             chord_mask = batch['chord_mask'].to(self.device)
             focus_positions = batch['focus_position'].to(self.device)
             target_chord_duration = batch['target_chord_duration'].to(self.device)  # NEW
@@ -61,33 +57,28 @@ class ChordToMelodyTrainer:
             melody_start = batch['melody_start'].to(self.device)
             melody_mask = batch['melody_mask'].to(self.device)
             
-            # REMOVED: segment_position is not in the new dataset
-            
+
             self.optimizer.zero_grad()
             
-            # Forward pass - updated for new model inputs
             pitch_logits, duration_pred, start_pred = self.model(
                 full_chord_sequence,
                 chord_mask,
                 focus_positions,
-                chord_durations=chord_durations,  # NEW: pass chord durations
+                chord_durations=chord_durations,
                 melody_pitch=melody_pitch,
                 training=True
             )
             
-            # Prepare targets (shift for next-token prediction)
-            target_pitch = melody_pitch[:, 1:]  # Remove first token
-            target_duration = melody_duration[:, :-1]  # Remove last token
-            target_start = melody_start[:, :-1]  # Remove last token
-            target_mask = melody_mask[:, :-1]  # Remove last token
+            target_pitch = melody_pitch[:, 1:]
+            target_duration = melody_duration[:, :-1]
+            target_start = melody_start[:, :-1]
+            target_mask = melody_mask[:, :-1]
             
-            # Calculate losses
             pitch_loss = self.pitch_criterion(
                 pitch_logits.reshape(-1, pitch_logits.size(-1)), 
                 target_pitch.reshape(-1)
             )
             
-            # Only compute regression losses on non-padded positions
             if target_mask.sum() > 0:
                 duration_loss = self.duration_criterion(
                     duration_pred[target_mask], 
@@ -101,22 +92,18 @@ class ChordToMelodyTrainer:
                 duration_loss = torch.tensor(0.0, device=self.device)
                 start_loss = torch.tensor(0.0, device=self.device)
             
-            # Combined loss (pitch is most important)
             total_batch_loss = pitch_loss + 0.3 * duration_loss + 0.3 * start_loss
             
-            # Backward pass
             total_batch_loss.backward()
             torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
             self.optimizer.step()
             
-            # Calculate accuracy
             accuracy = self.calculate_accuracy(pitch_logits, target_pitch, target_mask)
             
             total_loss += total_batch_loss.item()
             total_accuracy += accuracy
             num_batches += 1
             
-            # Print progress occasionally
             if batch_idx % 50 == 0 and batch_idx > 0:
                 current_loss = total_loss / (batch_idx + 1)
                 current_acc = total_accuracy / (batch_idx + 1)
@@ -133,9 +120,8 @@ class ChordToMelodyTrainer:
         
         with torch.no_grad():
             for batch in self.val_loader:
-                # Move batch to device - updated for new dataset structure
                 full_chord_sequence = batch['full_chord_sequence'].to(self.device)
-                chord_durations = batch['chord_durations'].to(self.device)  # NEW
+                chord_durations = batch['chord_durations'].to(self.device)
                 chord_mask = batch['chord_mask'].to(self.device)
                 focus_positions = batch['focus_position'].to(self.device)
                 target_chord_duration = batch['target_chord_duration'].to(self.device)  # NEW
@@ -145,18 +131,16 @@ class ChordToMelodyTrainer:
                 melody_mask = batch['melody_mask'].to(self.device)
                 
                 try:
-                    # Try normal forward pass
                     pitch_logits, duration_pred, start_pred = self.model(
                         full_chord_sequence,
                         chord_mask,
                         focus_positions,
-                        chord_durations=chord_durations,  # NEW: pass chord durations
+                        chord_durations=chord_durations,
                         melody_pitch=melody_pitch,
                         training=True
                     )
                 except RuntimeError as e:
                     if "MPS" in str(e):
-                        # Fall back to CPU only for this operation
                         self.model.cpu()
                         pitch_logits, duration_pred, start_pred = self.model(
                             full_chord_sequence.cpu(),
@@ -166,7 +150,6 @@ class ChordToMelodyTrainer:
                             melody_pitch=melody_pitch.cpu(),
                             training=True
                         )
-                        # Move model and results back to MPS
                         self.model.to(self.device)
                         pitch_logits = pitch_logits.to(self.device)
                         duration_pred = duration_pred.to(self.device)
@@ -174,7 +157,6 @@ class ChordToMelodyTrainer:
                     else:
                         raise e
                 
-                # Rest of validation logic remains the same
                 target_pitch = melody_pitch[:, 1:]
                 target_duration = melody_duration[:, :-1]
                 target_start = melody_start[:, :-1]
@@ -215,30 +197,24 @@ class ChordToMelodyTrainer:
         for epoch in range(num_epochs):
             print(f"\nEpoch {epoch+1}/{num_epochs}")
             
-            # Training and validation
             train_loss, train_acc = self.train_epoch()
             val_loss, val_acc = self.validate()
             
-            # Store losses
             self.train_losses.append(train_loss)
             self.val_losses.append(val_loss)
             
-            # Learning rate scheduling
             self.scheduler.step(val_loss)
             
-            # Print results
             print(f"Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.3f}")
             print(f"Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.3f}")
             print(f"Learning Rate: {self.optimizer.param_groups[0]['lr']:.6f}")
             self.plot_training_history()
             
-            # Save best model
             if val_loss < self.best_val_loss:
                 self.best_val_loss = val_loss
                 torch.save(self.model.state_dict(), 'best_chord_melody_model.pt')
                 print("✓ New best model saved!")
             
-            # Early stopping if loss increases too much
             if epoch > 10 and val_loss > min(self.val_losses) * 1.2:
                 print("Early stopping - validation loss increasing")
                 break
@@ -251,7 +227,6 @@ class ChordToMelodyTrainer:
         print(f"Best validation loss: {self.best_val_loss:.4f}")
         
     def plot_training_history(self):
-        """Plot training and validation loss."""
         plt.figure(figsize=(12, 5))
         
         plt.subplot(1, 2, 1)
@@ -265,7 +240,6 @@ class ChordToMelodyTrainer:
         
         plt.subplot(1, 2, 2)
         if len(self.val_losses) > 3:
-            # Show smoothed validation loss
             window = min(3, len(self.val_losses) // 2)
             smoothed_val = []
             for i in range(len(self.val_losses)):

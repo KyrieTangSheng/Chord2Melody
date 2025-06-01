@@ -17,10 +17,9 @@ class POP909DataProcessor:
         self.output_path = Path(output_path)
         self.output_path.mkdir(exist_ok=True)
         
-        # Musical parameters
-        self.time_resolution = 0.125  # 1/8 note resolution (in seconds)
-        self.min_chord_duration = 0.5  # Minimum chord duration to consider
-        self.melody_segment_length = melody_segment_length  # Length of melody segments to generate
+        self.time_resolution = 0.125  
+        self.min_chord_duration = 0.5 
+        self.melody_segment_length = melody_segment_length 
         
         self.chord_vocab = set()
         self.note_vocab = set()
@@ -40,10 +39,9 @@ class POP909DataProcessor:
                     if len(parts) >= 3:
                         start_time, end_time, chord_symbol = parts[:3]
                         if (float(end_time) - float(start_time)) >= self.min_chord_duration and chord_symbol != "N":
-                            # FIXED: Simplify chord BEFORE adding to vocabulary
                             simplified_chord = self.normalize_chord_symbol(chord_symbol)
                             chords.append((float(start_time), float(end_time), simplified_chord))
-                            self.chord_vocab.add(simplified_chord)  # Add simplified chord to vocab
+                            self.chord_vocab.add(simplified_chord)
         except Exception as e:
             error_msg = f"Error parsing chord file {chord_file_path}: {e}"
             print(error_msg)
@@ -58,51 +56,16 @@ class POP909DataProcessor:
         try:
             midi_data = pretty_midi.PrettyMIDI(midi_file_path)
             for instrument in midi_data.instruments:
-                ## NOTE: TARGET INSTRUMENT CHANGE HERE
                 if instrument.name and "MELODY" in instrument.name.upper():
                     return instrument
             
             if len(midi_data.instruments) > 0:
-                ## NOTE: TARGET INSTRUMENT CHANGE HERE
                 return midi_data.instruments[0]
             
         except Exception as e:
             print(f"Error loading MIDI file {midi_file_path}: {e}")
             
         return None
-
-    def extract_bridge_track(self, midi_file_path: str) -> Optional[pretty_midi.Instrument]:
-        """
-        Extract bridge track from MIDI file
-        """
-        midi_file_path = str(midi_file_path)
-        try:
-            midi_data = pretty_midi.PrettyMIDI(midi_file_path)
-            for instrument in midi_data.instruments:
-                ## NOTE: TARGET INSTRUMENT CHANGE HERE
-                if instrument.name and "BRIDGE" in instrument.name.upper():
-                    return instrument
-            
-            if len(midi_data.instruments) > 0:
-                ## NOTE: TARGET INSTRUMENT CHANGE HERE
-                return midi_data.instruments[1]
-            
-        except Exception as e:
-            print(f"Error loading MIDI file {midi_file_path}: {e}")
-            
-        return None
-    
-    def combine_tracks(self, melody_track: pretty_midi.Instrument, bridge_track: pretty_midi.Instrument) -> pretty_midi.Instrument:
-        """
-        Combine melody and bridge tracks
-        """
-        program = melody_track.program
-        combined_track = pretty_midi.Instrument(name="Combined Melody and Bridge", program=program)
-        combined_track.notes = sorted(
-            melody_track.notes + bridge_track.notes,
-            key=lambda note: note.start
-        )
-        return combined_track
     
     def quantize_melody(self, melody_track: pretty_midi.Instrument, song_duration: float) -> List[Dict]:
         """
@@ -130,62 +93,6 @@ class POP909DataProcessor:
             
         return quantized_melody
     
-    def create_melody_segments(self, chords: List[Tuple[float, float, str]], melody: List[Dict]) -> List[Dict]:
-        """
-        Create training segments by dividing the song into overlapping melody segments.
-        Each segment has the full chord sequence but focuses on a specific time range.
-        """
-        segments = []
-        
-        if not chords or not melody:
-            return segments
-        
-        song_duration = chords[-1][1]
-        segment_duration = self.melody_segment_length * self.time_resolution * 2  # Rough estimate
-        
-        # Create overlapping segments
-        segment_overlap = segment_duration * 0.25  # 25% overlap
-        current_time = 0.0
-        
-        while current_time < song_duration - segment_duration * 0.5:
-            segment_start = current_time
-            segment_end = min(current_time + segment_duration, song_duration)
-            
-            # Find melody notes in this segment
-            segment_melody = []
-            for note in melody:
-                if (note['start_time'] >= segment_start and note['start_time'] < segment_end):
-                    relative_note = note.copy()
-                    relative_note['relative_start'] = note['start_time'] - segment_start
-                    relative_note['relative_end'] = note['end_time'] - segment_start
-                    segment_melody.append(relative_note)
-            
-            # Only create segment if it has melody notes
-            if len(segment_melody) > 0 and len(segment_melody) <= self.melody_segment_length:
-                # Find the focus chord position (chord active during this segment)
-                focus_chord_idx = 0
-                focus_time = segment_start + segment_duration / 2  # Middle of segment
-                
-                for i, (chord_start, chord_end, _) in enumerate(chords):
-                    if chord_start <= focus_time < chord_end:
-                        focus_chord_idx = i
-                        break
-                
-                segment = {
-                    'full_chord_sequence': [chord[2] for chord in chords],  # All chords
-                    'chord_times': [(chord[0], chord[1]) for chord in chords],  # Timing info
-                    'focus_position': focus_chord_idx,  # Which chord to focus on
-                    'segment_start_time': segment_start,
-                    'segment_end_time': segment_end,
-                    'melody_notes': segment_melody,
-                    'segment_position': current_time / song_duration  # Normalized position in song
-                }
-                segments.append(segment)
-            
-            current_time += segment_duration - segment_overlap
-        
-        return segments
-    
     def normalize_chord_symbol(self, chord_symbol: str) -> str:
         """
         Normalize and simplify chord symbols
@@ -193,12 +100,8 @@ class POP909DataProcessor:
         if chord_symbol == 'N' or not chord_symbol or chord_symbol.strip() == '':
             return 'N'
         
-        # First clean up the symbol
         cleaned = chord_symbol.strip()
-        
-        # Then simplify it
         simplified = self.simplify_chord_symbol(cleaned)
-        
         return simplified
 
     def process_song(self, song_folder: Path) -> Optional[Dict]:
@@ -218,13 +121,7 @@ class POP909DataProcessor:
             print(f"Skipping {song_id} - not enough chords ({len(chords)})")
             return None
         
-        melody_track = self.extract_melody_track(midi_file_path)
-        bridge_track = self.extract_bridge_track(midi_file_path)
-        
-        combined_track = self.combine_tracks(melody_track, bridge_track)
-        if not combined_track:
-            print(f"No combined track found for {song_id}")
-            return None
+        combined_track = self.extract_melody_track(midi_file_path)
         
         song_duration = max(chords[-1][1], combined_track.notes[-1].end)
         
@@ -233,7 +130,6 @@ class POP909DataProcessor:
             print(f"No quantized melody for song {song_id}")
             return None
         
-        # CHANGED: Use chord-aligned segments instead of time-based segments
         melody_segments = self.create_chord_aligned_segments(chords, quantized_melody)
         if not melody_segments:
             print(f"No melody segments for song {song_id}")
@@ -324,41 +220,36 @@ class POP909DataProcessor:
         
         for song in self.processed_data:
             for segment in song['melody_segments']:
-                # For each chord in the segment, create a training example
                 for chord_pair in segment['chord_melody_pairs']:
                     
-                    # Prepare input: chord sequence with focus on current chord
                     chord_sequence = segment['full_chord_sequence']
                     current_chord_pos = chord_pair['chord_position_in_segment']
                     
-                    # Prepare output: melody notes for this specific chord
                     melody_notes = []
                     for note in chord_pair['notes']:
                         melody_notes.append({
                             'pitch': note['pitch'],
-                            'start_time': note['start_in_chord'],  # Relative to chord start
+                            'start_time': note['start_in_chord'],
                             'duration': note['end_in_chord'] - note['start_in_chord'],
                             'velocity': note['velocity']
                         })
                     
-                    # Create training example
                     training_example = {
                         'full_chord_sequence': chord_sequence,
                         'chord_durations': segment['chord_durations'],
-                        'focus_position': current_chord_pos,  # Which chord we're generating for
+                        'focus_position': current_chord_pos,
                         'target_chord': chord_pair['chord'],
                         'chord_duration': chord_pair['chord_duration'],
                         'output_melody': melody_notes,
                         'song_id': song['song_id'],
                         'segment_id': segment['segment_id'],
                         'timing_context': {
-                            'bpm_estimate': 60.0 / (chord_pair['chord_duration'] / 2),  # Rough BPM estimate
-                            'time_signature': '4/4',  # Could be extracted from MIDI
+                            'bpm_estimate': 60.0 / (chord_pair['chord_duration'] / 2),
+                            'time_signature': '4/4',
                             'chord_position_in_song': segment['segment_start_time'] / song['total_duration']
                         }
                     }
                     
-                    # Only add if there are melody notes for this chord
                     if len(melody_notes) > 0:
                         training_sequences.append(training_example)
         
@@ -387,65 +278,54 @@ class POP909DataProcessor:
         if chord_symbol == 'N' or not chord_symbol or chord_symbol.strip() == '':
             return 'N'
         
-        # Extract root note (everything before the colon)
         if ':' not in chord_symbol:
-            return chord_symbol  # Handle edge cases
+            return chord_symbol
         
         root, quality = chord_symbol.split(':', 1)
         
-        # Define simplification rules
         simplified_quality = None
         
-        # Major chords (including extensions, inversions, added notes)
         if any(pattern in quality for pattern in ['maj7', 'M7']):
             if any(pattern in quality for pattern in ['min', 'm7', 'minmaj']):
-                simplified_quality = 'minmaj7'  # Minor-major 7th
+                simplified_quality = 'minmaj7'
             else:
                 simplified_quality = 'maj7'
         elif 'maj' in quality:
             simplified_quality = 'maj'
         
-        # Minor chords
         elif any(pattern in quality for pattern in ['min7', 'm7']) and 'maj' not in quality:
             simplified_quality = 'min7'
         elif 'min' in quality or quality.startswith('m'):
             simplified_quality = 'min'
         
-        # Dominant 7th chords (including 9th, 11th, 13th extensions)
         elif any(pattern in quality for pattern in ['7', '9', '11', '13']) and 'maj' not in quality and 'min' not in quality:
             simplified_quality = '7'
         
-        # Diminished chords
         elif any(pattern in quality for pattern in ['dim', 'hdim', 'ø']):
             if '7' in quality or 'hdim' in quality:
                 simplified_quality = 'dim7'
             else:
                 simplified_quality = 'dim'
         
-        # Augmented chords
         elif 'aug' in quality or '+' in quality:
             simplified_quality = 'aug'
         
-        # Suspended chords
         elif any(pattern in quality for pattern in ['sus2', 'sus4', 'sus']):
             if 'sus2' in quality:
                 simplified_quality = 'sus2'
             else:
                 simplified_quality = 'sus4'
         
-        # 6th chords (treat as major with added 6th -> simplify to maj)
         elif '6' in quality and 'min' not in quality:
             simplified_quality = 'maj'
         elif '6' in quality and 'min' in quality:
             simplified_quality = 'min'
         
-        # Default fallback
         if simplified_quality is None:
-            # Try to infer from common patterns
             if quality == '' or quality.isdigit():
-                simplified_quality = 'maj'  # Default to major
+                simplified_quality = 'maj'
             else:
-                simplified_quality = 'maj'  # Conservative fallback
+                simplified_quality = 'maj'
         
         return f"{root}:{simplified_quality}"
 
@@ -459,18 +339,15 @@ class POP909DataProcessor:
         if not chords or not melody:
             return segments
         
-        # Parameters for chord-aligned segments
-        min_chords_per_segment = 4    # Minimum musical context
-        max_chords_per_segment = 12   # Maximum for attention span
-        overlap_chords = 2            # Overlap between segments
+        min_chords_per_segment = 4   
+        max_chords_per_segment = 12  
+        overlap_chords = 2              
         
-        # Create chord-aligned segments
         chord_idx = 0
         while chord_idx < len(chords):
-            # Define segment boundaries based on chords
+            segment_end_idx = min(chord_idx + max_chords_per_segment, len(chords))
             segment_end_idx = min(chord_idx + max_chords_per_segment, len(chords))
             
-            # Ensure minimum segment size
             if segment_end_idx - chord_idx < min_chords_per_segment and segment_end_idx < len(chords):
                 segment_end_idx = min(chord_idx + min_chords_per_segment, len(chords))
             
@@ -478,33 +355,27 @@ class POP909DataProcessor:
             segment_start_time = segment_chords[0][0]
             segment_end_time = segment_chords[-1][1]
             
-            # Create chord-to-melody mappings for this segment
             chord_melody_pairs = []
             
             for local_idx, (chord_start, chord_end, chord_symbol) in enumerate(segment_chords):
-                # Find melody notes that belong to this chord
                 chord_notes = []
                 
                 for note in melody:
                     note_start = note['start_time']
                     note_end = note['end_time']
                     
-                    # Note belongs to chord if it overlaps with chord duration
                     if not (note_end <= chord_start or note_start >= chord_end):
-                        # Calculate overlap percentage
                         overlap_start = max(note_start, chord_start)
                         overlap_end = min(note_end, chord_end)
                         overlap_duration = overlap_end - overlap_start
                         note_duration = note_end - note_start
                         
-                        # Only include note if significant overlap (>50% of note duration)
                         if note_duration > 0 and overlap_duration / note_duration > 0.5:
-                            # Make timing relative to chord start
                             relative_note = {
                                 'pitch': note['pitch'],
                                 'start_in_chord': max(0, note_start - chord_start),
                                 'end_in_chord': min(chord_end - chord_start, note_end - chord_start),
-                                'duration': note.get('duration', note_end - note_start),  # Handle missing duration
+                                'duration': note.get('duration', note_end - note_start),
                                 'velocity': note.get('velocity', 80),
                                 'chord_duration': chord_end - chord_start
                             }
@@ -519,7 +390,6 @@ class POP909DataProcessor:
                     'absolute_end_time': chord_end
                 })
             
-            # Only create segment if it has reasonable musical content
             total_notes = sum(len(pair['notes']) for pair in chord_melody_pairs)
             if total_notes > 0 and len(segment_chords) >= min_chords_per_segment:
                 segment = {
@@ -535,16 +405,13 @@ class POP909DataProcessor:
                 }
                 segments.append(segment)
             
-            # Move to next segment with overlap
             step_size = max_chords_per_segment - overlap_chords
             chord_idx += step_size
             
-            # Safety check
             if chord_idx >= len(chords) - min_chords_per_segment:
                 break
         
         return segments
-    
     
 def process_dataset(dataset_path: str, output_path: str, melody_segment_length: int = 32):
     processor = POP909DataProcessor(dataset_path, output_path, melody_segment_length)
@@ -552,40 +419,11 @@ def process_dataset(dataset_path: str, output_path: str, melody_segment_length: 
     processor.create_vocabularies()
     processor.save_processed_data()
     processor.create_training_sequences()
-
-
-def test_chord_simplification():
-    """Test the chord simplification on your vocabulary"""
-    
-    # Sample of complex chords from your vocabulary
-    test_chords = [
-        "C:maj", "C:maj7", "C:maj6", "C:maj6(9)", "C:maj7/3", "C:maj(9)/5",
-        "C:min", "C:min7", "C:min6", "C:min7(11)", "C:min9/5",
-        "C:7", "C:9", "C:11", "C:7/3", "C:9(13)", "C:7/b7",
-        "C:dim", "C:dim7", "C:hdim7", "C:dim/b3",
-        "C:aug", "C:aug(b7)",
-        "C:sus4", "C:sus2", "C:sus4(b7)", "C:sus4(b7,9)",
-        "F#:maj6(9)/5", "Bb:min7(4)/b7", "Ab:maj9(13)"
-    ]
-    
-    processor = POP909DataProcessor("", "")  # Dummy paths for testing
-    
-    print("Chord Simplification Test:")
-    print("Original -> Simplified")
-    print("-" * 30)
-    
-    simplified_set = set()
-    for chord in test_chords:
-        simplified = processor.simplify_chord_symbol(chord)
-        print(f"{chord:<20} -> {simplified}")
-        simplified_set.add(simplified)
-    
-    print(f"\nOriginal count: {len(test_chords)}")
-    print(f"Simplified count: {len(simplified_set)}")
-    print(f"Reduction: {len(test_chords) - len(simplified_set)} chords")
-    print(f"Simplified vocabulary: {sorted(simplified_set)}")
     
 if __name__ == "__main__":
     dataset_path = "POP909-Dataset"
     output_path = "processed_pop909_chord_melody"
     process_dataset(dataset_path, output_path)
+    
+    
+    

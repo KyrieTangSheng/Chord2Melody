@@ -43,11 +43,11 @@ def calculate_average_stats():
     # Calculate averages
     avg_stats = {
         "scores": {
-            metric: float(np.mean(values)) 
+            metric: round(float(np.mean(values)), 2)
             for metric, values in all_scores.items()
         },
         "melody_stats": {
-            stat: float(np.mean(values))
+            stat: round(float(np.mean(values)), 2)
             for stat, values in all_melody_stats.items()
         }
     }

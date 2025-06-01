@@ -10,7 +10,7 @@ from pathlib import Path
 import argparse
 import os
 import pretty_midi
-from evaluator import evaluate_melody, SimpleMelodyEvaluator  # ✅ Fixed import
+from evaluator import evaluate_melody, SimpleMelodyEvaluator
 
 def evaluate_generated_melody(melody, chord_sequence, chord_times):
     return evaluate_melody(melody, chord_sequence, chord_times)
@@ -191,28 +191,24 @@ def main(args):
                         print(f"  Expected duration: {expected_duration:.1f}s")
                         print(f"  Coverage ratio: {generated_duration/expected_duration:.2f}")
                         
-                        # ✅ FIXED: Comprehensive evaluation
                         evaluation_scores = evaluate_generated_melody(
                             generated_melody, 
                             real_chords, 
                             [(start, end, 0) for start, end, _ in chord_times]
                         )
                         
-                        # ✅ FIXED: Detailed chord-by-chord analysis
                         evaluator = SimpleMelodyEvaluator()
                         print(f"\n🔍 CHORD-BY-CHORD ANALYSIS:")
-                        for i, chord in enumerate(real_chords[:5]):  # Show first 5 chords
+                        for i, chord in enumerate(real_chords[:5]):
                             if i >= len(chord_times):
                                 break
                                 
                             chord_start, chord_end = chord_times[i][0], chord_times[i][1]
                             
-                            # Find notes in this chord
                             chord_notes = [n for n in generated_melody 
                                           if chord_start <= n['start_time'] < chord_end]
                             
                             if chord_notes:
-                                # Evaluate just this chord
                                 chord_alignment = evaluator.chord_alignment_score(
                                     chord_notes, [chord], [(chord_start, chord_end, 0)]
                                 )
@@ -223,17 +219,16 @@ def main(args):
                             else:
                                 print(f"  Chord {i+1} ({chord}): No notes generated")
                         
-                        # ✅ FIXED: Save evaluation results
                         evaluation_results = {
                             'song_id': song_id,
-                            'scores': evaluation_scores,  # ✅ Now this variable exists
+                            'scores': evaluation_scores,
                             'melody_stats': {
                                 'num_notes': len(generated_melody),
                                 'duration': max(n['start_time'] + n['duration'] for n in generated_melody),
                                 'pitch_range': max(n['pitch'] for n in generated_melody) - min(n['pitch'] for n in generated_melody),
                                 'avg_note_duration': sum(n['duration'] for n in generated_melody) / len(generated_melody)
                             },
-                            'chord_progression': real_chords[:10],  # First 10 chords for reference
+                            'chord_progression': real_chords[:10],
                             'timing_info': {
                                 'expected_duration': expected_duration,
                                 'generated_duration': generated_duration,
@@ -241,14 +236,12 @@ def main(args):
                             }
                         }
                         
-                        # Save evaluation results
                         os.makedirs("evaluation_results", exist_ok=True)
                         with open(f'evaluation_results/evaluation_{song_id}.json', 'w') as f:
                             json.dump(evaluation_results, f, indent=2)
                         
                         print(f"✅ Evaluation results saved to evaluation_results/evaluation_{song_id}.json")
                         
-                        # Save generated melody with original tracks
                         os.makedirs("generated_real_song_aligned", exist_ok=True)
                         output_path = f"generated_real_song_aligned/{song_id}.mid"
                         
@@ -263,12 +256,10 @@ def main(args):
                             
                         except Exception as e:
                             print(f"  Error saving MIDI: {e}")
-                            # Fallback: save without original tracks
                             simple_output = f"generated_melody_only_{song_id}.mid"
                             generate_midi_from_melody(generated_melody, simple_output)
                             print(f"  Saved melody-only version to {simple_output}")
                         
-                        # Performance comparison
                         if 'original_duration' in locals():
                             print(f"\nTiming Comparison:")
                             print(f"  Original MIDI:     {original_duration:.1f}s")

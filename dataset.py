@@ -16,7 +16,6 @@ class ChordMelodyDataset(Dataset):
         self.max_melody_length = max_melody_length
         self.max_chord_length = max_chord_length
         
-        # Filter sequences
         self.training_sequences = [seq for seq in self.training_sequences 
                                  if len(seq['output_melody']) <= max_melody_length 
                                  and len(seq['full_chord_sequence']) <= max_chord_length]
@@ -34,44 +33,35 @@ class ChordMelodyDataset(Dataset):
     def __getitem__(self, idx):
         sequence = self.training_sequences[idx]
         
-        # Encode chord sequence
         chord_indices = []
         for chord in sequence['full_chord_sequence']:
             chord_indices.append(self.chord_to_idx.get(chord, self.chord_to_idx['<UNK>']))
         
-        # Encode chord durations (normalized)
         chord_durations = sequence['chord_durations']
         max_duration = max(chord_durations) if chord_durations else 4.0
         normalized_durations = [d / max_duration for d in chord_durations]
         
-        # Pad sequences
         original_chord_length = len(chord_indices)
         while len(chord_indices) < self.max_chord_length:
             chord_indices.append(self.chord_to_idx['<PAD>'])
             normalized_durations.append(0.0)
         
-        # Focus position (which chord we're generating melody for)
         focus_position = min(sequence['focus_position'], original_chord_length - 1)
         
-        # Target chord duration
         target_chord_duration = sequence['chord_duration']
         
-        # Melody encoding - notes relative to target chord timing
         melody_pitches, melody_starts, melody_durations = [], [], []
         for note in sequence['output_melody']:
             melody_pitches.append(note['pitch'])
-            # Normalize timing to chord duration
             melody_starts.append(note['start_time'] / target_chord_duration)
             melody_durations.append(note['duration'] / target_chord_duration)
         
-        # Pad melody
         actual_melody_length = len(melody_pitches)
         while len(melody_pitches) < self.max_melody_length:
             melody_pitches.append(0)
             melody_starts.append(0.0)
             melody_durations.append(0.0)
         
-        # Create masks
         chord_mask = [1 if i < original_chord_length else 0 for i in range(self.max_chord_length)]
         melody_mask = [1 if i < actual_melody_length else 0 for i in range(self.max_melody_length)]
         

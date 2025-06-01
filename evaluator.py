@@ -40,7 +40,7 @@ class SimpleMelodyEvaluator:
         if quality in self.chord_pitch_maps:
             intervals = self.chord_pitch_maps[quality]
         else:
-            intervals = self.chord_pitch_maps['maj']  # Default to major
+            intervals = self.chord_pitch_maps['maj'] 
         
         return [(root + interval) % 12 for interval in intervals]
 
@@ -68,11 +68,11 @@ class SimpleMelodyEvaluator:
                 pitch_class = note['pitch'] % 12
                 
                 if pitch_class in chord_notes:
-                    alignment_scores.append(1.0)  # Perfect fit
+                    alignment_scores.append(1.0)
                 else:
-                    alignment_scores.append(0.0)  # Doesn't fit
+                    alignment_scores.append(0.0)
             else:
-                alignment_scores.append(0.5)  # Unknown chord
+                alignment_scores.append(0.5)
         
         return np.mean(alignment_scores) if alignment_scores else 0.0
 
@@ -83,7 +83,6 @@ class SimpleMelodyEvaluator:
         
         actual_duration = max(n['start_time'] + n['duration'] for n in melody)
         
-        # Calculate how close we are to expected duration
         ratio = min(actual_duration, expected_duration) / max(actual_duration, expected_duration)
         return ratio
 
@@ -96,24 +95,22 @@ class SimpleMelodyEvaluator:
         if total_duration <= 0:
             return 0.0
         
-        density = len(melody) / total_duration  # notes per second
+        density = len(melody) / total_duration
         
-        # Ideal density is around 0.5-2 notes per second
         if 0.5 <= density <= 2.0:
-            return 1.0  # Perfect
+            return 1.0
         elif density < 0.5:
-            return density / 0.5  # Scale up from 0
-        else:  # density > 2.0
-            return max(0.0, 1.0 - (density - 2.0) / 3.0)  # Scale down, cap at 0
+            return density / 0.5
+        else:
+            return max(0.0, 1.0 - (density - 2.0) / 3.0)
 
     def evaluate(self, melody: List[Dict], chord_sequence: List[str], chord_times: List[Tuple]) -> Dict[str, float]:
         """Main evaluation function - returns scores between 0.0 and 1.0"""
         
-        # Calculate expected duration
         if chord_times and len(chord_times[0]) >= 2:
             expected_duration = chord_times[-1][1]
         else:
-            expected_duration = len(chord_sequence) * 2.0  # Fallback: 2 seconds per chord
+            expected_duration = len(chord_sequence) * 2.0
         
         scores = {
             'chord_alignment': self.chord_alignment_score(melody, chord_sequence, chord_times),
@@ -121,7 +118,6 @@ class SimpleMelodyEvaluator:
             'note_density': self.note_density_score(melody)
         }
         
-        # Simple overall score (equal weights)
         scores['overall'] = (scores['chord_alignment'] + scores['timing_accuracy'] + scores['note_density']) / 3.0
         
         return scores
@@ -137,7 +133,6 @@ class SimpleMelodyEvaluator:
         print(f"Timing Accuracy:   {scores['timing_accuracy']:.3f}")
         print(f"Note Density:      {scores['note_density']:.3f}")
         
-        # Simple rating
         if scores['overall'] > 0.8:
             print("🌟 Excellent!")
         elif scores['overall'] > 0.6:
@@ -147,7 +142,6 @@ class SimpleMelodyEvaluator:
         else:
             print("❌ Needs work")
         
-        # Basic stats
         if melody:
             duration = max(n['start_time'] + n['duration'] for n in melody)
             density = len(melody) / duration if duration > 0 else 0
@@ -162,7 +156,6 @@ class SimpleMelodyEvaluator:
         return scores
 
 
-# Simple usage function
 def evaluate_melody(melody, chord_sequence, chord_times):
     """Simple function to evaluate a melody"""
     evaluator = SimpleMelodyEvaluator()

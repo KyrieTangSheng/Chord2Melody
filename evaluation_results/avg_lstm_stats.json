@@ -1,0 +1,16 @@
+{
+    "scores": {
+      "chord_alignment": 0.48,
+      "timing_accuracy": 0.71,
+      "note_density": 0.66,
+      "overall": 0.62
+    },
+    "melody_stats": {
+      "num_notes": 520.44,
+      "duration": 244.79,
+      "pitch_range": 55.88,
+      "avg_note_duration": 0.32
+    },
+    "num_songs_analyzed": 103
+  }
+  
